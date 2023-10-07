@@ -1,0 +1,29 @@
+
+{% for solicitacao in object_list %}
+
+            <tr>
+                <td>{{ solicitacao.usuario }}</td>
+                <td>{{ solicitacao.get_status_display }}</td>
+                <td>{{ solicitacao.justificativa }}</td>
+                <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
+                <td>{{ solicitacao.hora }}</td>
+                
+                <td>
+                    <button 
+                    type="button"
+                    class="btn btn-secondary btn-sm js-update"
+                    data-url="{% url 'js-editar' solicitacao.pk %}">Editar</button> 
+                    
+                    <button 
+                    type="button" 
+                    class="btn btn-danger btn-sm js-delete" 
+                    data-url="{% url 'js-excluir' solicitacao.pk %}">Excluir</button>
+                
+                </td>
+            </tr>
+            
+            {% empty %}
+            <tr>
+                <td colspan="3"> Não há Solicitações.</td>
+            </tr>
+            {% endfor %}
