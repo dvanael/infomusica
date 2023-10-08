@@ -1,16 +1,21 @@
-<form method="post" action="{% url 'js-criar' %}" class="js-create-form">
+{% load crispy_forms_tags %}
+
+<form method="post" action="{% url 'js-criar' %}" class="bg-dark text-white js-create-form" >
     {% csrf_token %}
 
     <div class="modal-header">
-        <h4 class="modal-title">CRIAR</h4>
-        <button type="button" class="close" data-dismiss="modal">X</button>
+        <h4 class="modal-title">NOVA SOLICITAÇÃO</h4>
+        <button type="button" class="close" data-dismiss="modal">
+            <i class="fa-solid fa-xmark text-white"></i></button>
     </div>
 
     <div class="modal-body">
-        {{ form.as_p }}
+        <p class='lead'> Preencha todos os campos obrigatórios.</p>
+        {{ form|crispy }}
     </div>
 
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Criar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
     </div>
 </form>

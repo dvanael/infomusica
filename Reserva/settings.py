@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'solicitacao.apps.SolicitacaoConfig',
     'crispy_forms',
     'crispy_bootstrap4',
+    'fontawesomefree',
 ]
 
 

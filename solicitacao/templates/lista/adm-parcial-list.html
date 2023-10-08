@@ -4,7 +4,15 @@
             <tr>
                 <td>{{ solicitacao.usuario }}</td>
                 <td>{{ solicitacao.matricula }}</td>
-                <td>{{ solicitacao.get_status_display }}</td>
+
+                {% if solicitacao.status == 'PEN' %}
+                    <td><i class="fa-regular fa-circle"></i>  {{ solicitacao.get_status_display }}</td>
+                {% elif solicitacao.status == 'APR' %}
+                    <td><i class="fa-regular fa-circle-check" style="color: #5fce37;"></i> {{ solicitacao.get_status_display }}</td>
+                {% elif solicitacao.status == 'REJ' %}
+                    <td><i class="fa-regular fa-circle-xmark" style="color: #ef5b5b;"></i> {{ solicitacao.get_status_display }}</td>
+                {%endif%}
+
                 <td>{{ solicitacao.justificativa }}</td>
                 <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
                 <td>{{ solicitacao.hora }}</td>
@@ -19,12 +27,12 @@
                     <a 
                     title="Editar"
                     class="btn btn-secondary btn-sm "
-                    href="{% url 'editar-solicitacao' solicitacao.pk %}">Editar</a> 
+                    href="{% url 'editar-solicitacao' solicitacao.pk %}"><i class="fa-solid fa-pen"></i> Editar</a> 
                     
                     <a 
                     title="Excluir" 
                     class="btn btn-danger btn-sm " 
-                    href="{% url 'excluir-solicitacao' solicitacao.pk %}">Excluir</a>
+                    href="{% url 'excluir-solicitacao' solicitacao.pk %}"><i class="fa-solid fa-trash"></i> Excluir</a>
                 
                 </td>
             </tr>
