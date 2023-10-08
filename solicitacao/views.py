@@ -261,3 +261,4 @@ class StatusUpdate(GroupRequiredMixin, UpdateView):
         self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
         return self.object
        
+

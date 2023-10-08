@@ -1,12 +1,11 @@
 {% load crispy_forms_tags %}
 
-<form method="post" action="{% url 'js-criar' %}" class="bg-dark text-white js-create-form" >
+<form method="post" action="{% url 'js-criar' %}" class="js-create-form" >
     {% csrf_token %}
 
     <div class="modal-header">
         <h4 class="modal-title">NOVA SOLICITAÇÃO</h4>
-        <button type="button" class="close" data-dismiss="modal">
-            <i class="fa-solid fa-xmark text-white"></i></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
 
     <div class="modal-body">
@@ -16,6 +15,6 @@
 
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Criar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
     </div>
 </form>

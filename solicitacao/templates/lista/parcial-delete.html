@@ -1,11 +1,10 @@
 
-<form method="post" action="{% url 'js-excluir' solicitacao.pk %}" class="bg-dark text-white js-delete-form">
+<form method="post" action="{% url 'js-excluir' solicitacao.pk %}" class="js-delete-form" >
     {% csrf_token %}
 
     <div class="modal-header">
         <h4 class="modal-title">EXCLUIR SOLICITAÇÃO</h4>
-        <button type="button" class="close" data-dismiss="modal">
-            <i class="fa-solid fa-xmark text-white"></i></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
 
     <div class="modal-body">
@@ -14,6 +13,6 @@
 
     <div class="modal-footer">
         <button type="submit" class="btn btn-danger">Excluir</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
     </div>
 </form>

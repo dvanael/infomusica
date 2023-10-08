@@ -1,22 +1,21 @@
 {% load crispy_forms_tags %}
 
-<form method="post" action="{% url 'js-editar' form.instance.pk %}" class="bg-dark text-white js-update-form">
+<form method="post" action="{% url 'js-editar' form.instance.pk %}" class="js-update-form">
     {% csrf_token %}
 
     <div class="modal-header">
-        <h4 class="modal-title">EDITAR </h4>
-        <button type="button" class="close" data-dismiss="modal">
-            <i class="fa-solid fa-xmark text-white"></i></button>
+        <h4 class="modal-title">EDITAR SOLICITAÇÃO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
 
     <div class="modal-body">
-        <strong style="color:cornflowerblue;">{{form.instance}}</strong>  
+        <strong style="color: #20399e">{{form.instance}}</strong>  
         <p class='lead'> Preencha todos os campos obrigatórios.</p>
         {{ form|crispy }}
     </div>
 
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Salvar    </button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
     </div>
 </form>

@@ -32,4 +32,4 @@ class Solicitacao(models.Model):
         super(Solicitacao, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "{} ({}) - {}".format(self.usuario, self.status, self.data)  
+        return "Solicitação de {} ({}) - {}".format(self.usuario, self.status, self.data)  

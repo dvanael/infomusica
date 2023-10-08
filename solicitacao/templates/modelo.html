@@ -19,58 +19,56 @@
 <body>
     {% block menu %}
     
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active"> 
-            <a class="nav-link" href="{% url 'inicio' %}">Início <span class="sr-only">(current)</span></a>
-          </li>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3">
+      <div class="container">
+        <a href="" class="navbar-brand d-flex align-items-center">
+          <i class="fa-solid fa-guitar fa-lg me-2"></i>iNFO MúSiCA </a>
 
-          {% for group in request.user.groups.all %}
-          {% if group.name == 'Admin' %}
-            <!-- ADM MENU -->
-    
-          <li class="nav-item active">
-              <a class="nav-link" href="{% url 'listar-solicitacao' %}">Gerenciar Solicitações</a>
-          </li>
-          
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'listar-usuario' %}">Gerenciar Usuarios</a>
-        </li>
-        </ul>
-        
-        
-          {% else %}
-            <!-- USER MENU-->
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'listar-solicitacao' %}">Minhas Solicitações</a>
-          </li>
-        
-          {% endif %}
-          {% endfor %}
-        </ul>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+            <i class="fa-solid fa-bars"></i>
+          </button>
 
-        <div class="my-2 my-lg-0">
-          {% if request.user.is_authenticated %}
-          <a href="{% url 'logout' %}" class="btn btn-outline-secondary">Logout</a>
+        <div class="collapse navbar-collapse" id="menuNavbar">
+          <div class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            {% for group in request.user.groups.all %}
+            {% if group.name == 'Admin' %}
+
+            <!-- NAV ADM -->
+            <a href="{% url 'inicio' %}" class="nav-link active">Inicio</a>
+            <a href="{% url 'listar-solicitacao' %}"class="nav-link active">Gerencia Solicitações</a>
+            <a href="{% url 'listar-usuario' %}" class="nav-link active">Gerenciar Usuários</a>
+
+            {%else%}
+            <!-- NAV USUARIO -->
+            <a href="{% url 'inicio' %}" class="nav-link active">Inicio</a>
+            <a href="{% url 'listar-solicitacao' %}"class="nav-link active">Minhas Solicitações</a>
+            
+            {%endif%}
+            {%endfor%}
+          </div>
+          <div class="mb-2 mb-lg-0 text-white d-flex align-items-center">
+            <span class="nav-text mx-2">
+              <i class="fa-solid fa-user"></i> <strong class="mx-1 text-uppercase">{{ request.user }}</strong> 
+            </span>
+
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="btn btn-outline-secondary ">Logout</a>
           
-          {% else %}
-          <a href="{% url 'login' %}" class="btn btn-outline-light">Login</a>
-          <a href="{% url 'registrar' %}" class="btn btn-outline-light">Cadastre-se</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-light mx-1">Login</a>
+            <a href="{% url 'registrar' %}" class="btn btn-outline-light mx-1">Cadastre-se</a>
           
-          {% endif %}
-          <i class="fa-solid fa-user p-2 text-white"></i> <strong class="p-2 text-white">{{ request.user }}</strong> 
+            {% endif %}
+          </div>
+          
            
         </div>
+        </div>
+
       </div>
-  </nav>
+    </nav> 
 
-    {% endblock %}
-
-    {% block destaque %}
-    <div class="bg-secondary">
-
-    </div>
     {% endblock %}
 
     {% block conteudo %}
@@ -83,9 +81,12 @@
     {% endblock %}
 
     {% block rodape %}
-    <footer class="footer md-12 py-3 bg-body-tertiary bg-dark text-white absolute-bottom">
-      <div class="container">
-        <i class="fa-solid fa-guitar fa-2xl   "></i> <span class="text-body-secondary">iNFOMúSiCA</span>
+    <div class="py-4"></div>
+    <footer class= "py-3 bg-dark text-white position-relative bottom-0 ">
+      
+      <div class="container d-flex align-items-center">
+        <p class="lead text fs-6 fst-italic">Todos os direitos reservados.</p>
+        <span class="ms-auto">iNFOMúSiCA™</span>
       </div>
     </footer>
     {% endblock %}
