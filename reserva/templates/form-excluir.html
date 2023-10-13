@@ -1,0 +1,26 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Excluir Solicitação</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="my-5 mx-auto top-50 p-5 text-white " id="box">
+    <h3>Excluir Solicitação</h3>
+    <p class='lead'> Confirme para excluir o registro definitivamente.</p>
+
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <p>
+        Deseja excluir o registro: <b>{{ object }}</b>?</p>
+
+        <button type="submit" class="btn btn-danger"> Excluir</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

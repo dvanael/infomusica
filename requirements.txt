@@ -2,6 +2,6 @@ django
 django-crispy-forms
 django-braces
 django-cleanup
-bootstrap5
+django-bootstrap5
 crispy-bootstrap5
 fontawesomefree==6.4.2

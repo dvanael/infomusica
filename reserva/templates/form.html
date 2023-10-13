@@ -1,0 +1,36 @@
+{% extends 'modelo.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>Criar Solicitação</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="my-5 mx-auto top-50 p-5  text-white " id="box">
+    <h3>Criar Solicitação</h3>
+    <p class='lead'> Preencha todos os campos obrigatórios.</p>
+
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {{ form|crispy}}
+        {{ profile_form|crispy}}
+
+        <button type="submit" class="btn btn-primary"> Enviar</button>
+    </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function(){
+        $("#id_data").mask("00/00/0000");
+        $("#id_hora").mask("00:00:00");
+    });
+</script>
+{% endblock %}

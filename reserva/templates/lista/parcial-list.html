@@ -1,0 +1,35 @@
+
+{% for solicitacao in object_list %}
+
+<tr>
+    {% if solicitacao.status == 'PEN' %}
+        <td><i class="fa-regular fa-circle"></i>  {{ solicitacao.get_status_display }}</td>
+    {% elif solicitacao.status == 'APR' %}
+        <td><i class="fa-regular fa-circle-check" style="color: #5fce37;"></i> {{ solicitacao.get_status_display }}</td>
+    {% elif solicitacao.status == 'REJ' %}
+        <td><i class="fa-regular fa-circle-xmark" style="color: #ef5b5b;"></i> {{ solicitacao.get_status_display }}</td>
+    {%endif%}
+
+    <td>{{ solicitacao.justificativa }}</td>
+    <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
+    <td>{{ solicitacao.hora }}</td>
+                
+    <td>
+        <button 
+        type="button"
+        class="btn btn-secondary btn-sm mx-1 js-update"
+        data-url="{% url 'js-editar' solicitacao.pk %}"><i class="fa-solid fa-pen"></i></button> 
+                    
+        <button 
+        type="button" 
+        class="btn btn-danger btn-sm mx-1 js-delete" 
+        data-url="{% url 'js-excluir' solicitacao.pk %}"><i class="fa-solid fa-trash"></i></button>
+    
+    </td>
+</tr>
+            
+{% empty %}
+<tr>
+    <td colspan="3"> Não há Solicitações.</td>
+</tr>
+{% endfor %}
