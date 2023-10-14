@@ -1,27 +1,29 @@
-from django.forms.models import BaseModelForm
-from django.shortcuts import render , redirect
-from braces.views import GroupRequiredMixin
+from django.shortcuts import render, redirect
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.contrib.auth.models import User, Group
+from django.contrib.auth import authenticate, login
+
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic.list import ListView
-from .forms import UsuarioForm, PerfilForm
+
+from braces.views import GroupRequiredMixin
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
+
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
+from .forms import UsuarioForm, PerfilForm, SolicitacaoForm
 from .models import Solicitacao, Perfil
 
-#AJAX IMPORT
-from django.http import JsonResponse
-from django.template.loader import render_to_string
-from .forms import EventoForm
-from django.contrib.auth import authenticate, login
+# -- INDEX --
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
-# FUNÇÕES DO AJAX
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import JsonResponse
-from django.template.loader import render_to_string
-
+# -- FUNÇÕES DO AJAX -- 
+# SAVE FORM
 def save_form(request, form, template_name):
     data = dict()
 
@@ -29,8 +31,8 @@ def save_form(request, form, template_name):
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
-            solicitacoes = Solicitacao.objects.all().order_by('-post')
-            paginator = Paginator(solicitacoes, 7) # Define o número de itens por página
+            solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+            paginator = Paginator(solicitacoes, 7)
             page = request.GET.get('page')
 
             try:
@@ -49,42 +51,46 @@ def save_form(request, form, template_name):
 
     return JsonResponse(data)
 
-def evento_create(request):
+# AJAX CREATE
+def solicitacao_create(request):
     if request.method == 'POST':
-        form = EventoForm(request.POST)
+        form = SolicitacaoForm(request.POST)
         form.instance.usuario = Perfil.objects.get(user=request.user)
         form.instance.post = timezone.now()
 
     else:
-        form = EventoForm()
+        form = SolicitacaoForm()
         form.instance.usuario = Perfil.objects.get(user=request.user)
         form.instance.post = timezone.now()
     
     return save_form(request, form, "lista/parcial-create.html")
 
-def evento_update(request, pk):
+# AJAX UPDATE
+def solicitacao_update(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     if request.method == 'POST':
-        form = EventoForm(request.POST, instance=solicitacao)
+        form = SolicitacaoForm(request.POST, instance=solicitacao)
         form.instance.usuario = Perfil.objects.get(user=request.user)
         form.instance.post = timezone.now()
         
     else:
-        form = EventoForm(instance=solicitacao)
+        form = SolicitacaoForm(instance=solicitacao)
         form.instance.usuario = Perfil.objects.get(user=request.user)
         form.instance.post = timezone.now()
 
     return save_form(request, form, "lista/parcial-update.html")
 
-def evento_delete(request, pk):
+
+# AJAX DELETE
+def solicitacao_delete(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     data = dict()
 
     if request.method == 'POST':
         solicitacao.delete()
         data['form_is_valid'] = True
-        solicitacoes = Solicitacao.objects.all().order_by('-post')
-        paginator = Paginator(solicitacoes, 7)  # Define o número de itens por página
+        solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+        paginator = Paginator(solicitacoes, 7)  
         page = request.GET.get('page')
 
         try:
@@ -101,13 +107,10 @@ def evento_delete(request, pk):
     
     return JsonResponse(data)
 
-# INDEX
-class IndexView(TemplateView):
-    template_name = 'index.html'
 
-
-# -- CRUD DE USUARIO
-def resgister(request):
+# -- CRUD DE USUARIO -- 
+# REGISTRO
+def register(request):
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         profile_form = PerfilForm(request.POST)
@@ -137,6 +140,7 @@ def resgister(request):
     context = {'form': form, 'profile_form': profile_form} 
     return render(request, 'sing-up.html',  context)
 
+# UPDATE
 class UsuarioUpdate(GroupRequiredMixin, UpdateView):
     group_required = [u'Admin']
     login_url = reverse_lazy('login')
@@ -144,11 +148,17 @@ class UsuarioUpdate(GroupRequiredMixin, UpdateView):
     fields = ['username', 'email']
     template_name = 'form.html'
     success_url = reverse_lazy('listar-usuario')
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['Titulo'] = "Editar Usuário: {}".format(self.object)
+        return context
 
     def get_object(self, query=None): 
         self.object = get_object_or_404(User, pk = self.kwargs['pk'])
         return self.object
     
+# DELETE
 class UsuarioDelete(GroupRequiredMixin, DeleteView):
     group_required = [u'Admin']
     login_url = reverse_lazy('login')
@@ -156,6 +166,12 @@ class UsuarioDelete(GroupRequiredMixin, DeleteView):
     template_name = 'form-excluir.html'
     success_url = reverse_lazy('listar-usuario')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['Titulo'] = "Excluir Usuário: {}".format(self.object)
+        return context
+
+# LIST
 class UsuarioList(GroupRequiredMixin, ListView):
     group_required = [u'Admin']
     login_url = reverse_lazy('login')
@@ -164,7 +180,7 @@ class UsuarioList(GroupRequiredMixin, ListView):
     content_object_name = 'object_list'
     
 
-# -- CRUD DE SOLICITÇÕES
+# -- CRUD DE SOLICITÇÕES --
 # CREATE
 class SolicitacaoCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Aluno', u'Admin']
@@ -173,6 +189,11 @@ class SolicitacaoCreate(GroupRequiredMixin, CreateView):
     fields = ['justificativa', 'data', 'hora']
     template_name = 'form.html'
     success_url = reverse_lazy('listar-solicitacao')
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['Titulo'] = "Criar Solicitação" 
+        return context
 
     def form_valid(self, form):
         form.instance.usuario = Perfil.objects.get(user=self.request.user)
@@ -187,6 +208,11 @@ class SolicitacaoUpdate(GroupRequiredMixin, UpdateView):
     fields = ['justificativa', 'data', 'hora']
     template_name = 'form.html'
     success_url =  reverse_lazy('listar-solicitacao')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['Titulo'] = "Editar Solicitação" 
+        return context
 
     def form_valid(self, form):
         form.instance.post = timezone.now()
@@ -207,6 +233,11 @@ class SolicitacaoDelete(GroupRequiredMixin, DeleteView):
     model = Solicitacao
     template_name = 'form-excluir.html'
     success_url = reverse_lazy('listar-solicitacao')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['Titulo'] = "Excluir Solicitação" 
+        return context
 
     def get_object(self, query=None):
         if self.request.user.groups.filter(name = u'Admin'):
@@ -240,7 +271,12 @@ class SolicitacaoList(GroupRequiredMixin, ListView):
         elif filtro_data == 'ultimo_mes':
             self.object_list = self.object_list.filter(data__gte=timezone.now() - timezone.timedelta(days=30))
 
+        elif filtro_data == 'prox_semana':
+            self.object_list = self.object_list.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=7)])
 
+        elif filtro_data == 'prox_mes':
+            self.object_list = self.object_list.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=30)])
+        
         return self.object_list
     
 
@@ -252,6 +288,11 @@ class StatusUpdate(GroupRequiredMixin, UpdateView):
     fields = ['status', 'justificativa']
     template_name = 'form.html'
     success_url = reverse_lazy('listar-solicitacao')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['Titulo'] = "Gerenciar Status" 
+        return context
 
     def form_valid(self, form):
         form.instance.post = timezone.now()

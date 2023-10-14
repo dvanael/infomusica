@@ -25,6 +25,10 @@
                             Última semana</option>
                         <option value="?filtro_data=ultimo_mes" {% if 'ultimo_mes' in request.GET.filtro_data %}selected{% endif %}>
                             Último mês</option>
+                        <option value="?filtro_data=prox_semana" {% if 'prox_semana' in request.GET.filtro_data %}selected{% endif %}>
+                            Próxima semana</option>
+                        <option value="?filtro_data=prox_mes" {% if 'prox_mes' in request.GET.filtro_data %}selected{% endif %}>
+                            Próximo mês</option>
                     </select>
                     <label for="floatingSelect">FILTRO</label>
                     </div>  
@@ -33,7 +37,7 @@
                 <div class="col-md-4">
                     <!-- SOLICITAÇÃO CREATE  -->
                     <a href="{% url 'criar-solicitacao' %}" class="btn btn-secondary"> 
-                        <strong>NOVA SOLICITAÇÃO - OLD</strong></a>
+                        <strong>CRIAR NOVA SOLICITAÇÃO</strong></a>
                 </div>
 
                 <div class="col-md-4">
@@ -154,5 +158,5 @@
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'js/evento.js' %}"></script>
+<script src="{% static 'js/solicitacao.js' %}"></script>
 {% endblock %}

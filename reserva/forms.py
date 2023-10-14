@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from .models import Solicitacao, Perfil
-
+        
 # USUARIO FORM
 class UsuarioForm(UserCreationForm):
     email = forms.EmailField(max_length = 100)
@@ -22,9 +22,8 @@ class PerfilForm(forms.ModelForm):
         model = Perfil
         fields = ['matricula']
 
-
 # AJAX SOLICITACAO FORM
-class EventoForm(forms.ModelForm):
+class SolicitacaoForm(forms.ModelForm):
     class Meta:
         model = Solicitacao
         fields = ('justificativa', 'data', 'hora')

@@ -18,32 +18,25 @@
         {% if request.user.is_authenticated %}
         <h3>
             Ação não permitida!</h3>
-
-            <hr>
-
+        <hr>
         <p class="lead">
             <b>Houve algum problema para processar a ação desejada ou você não tem permissão.</b></p>
-        
-        <a href="{% url 'inicio' %}" class="btn btn-primary"> VOLTAR AO INICIO</a>
+        <a href="{% url 'inicio' %}" class="btn btn-secondary"> VOLTAR AO INICIO</a>
 
         {% else %}
         <h1>
             LOGIN</h1>  
-            
         <hr>
-
         <form action="" method="post">
             {% csrf_token %}
 
             {{ form|crispy }}
 
-        <div class="row" id="btn_login"> 
-            <a class="col-md-5 mx-2 p-2 btn btn-dark" href="{% url 'registrar' %}">
+        <div class="row"> 
+            <a class="col-md-5 mx-auto btn btn-dark" href="{% url 'registrar' %}">
                 CRIAR CONTA</a>
 
-                <div class="col-md-1"></div>
-
-            <button type="submit" class="col-md-5 mx-2 p-2 btn btn-success">
+            <button type="submit" class="col-md-5 mx-auto btn btn-success">
                 ENTRAR</button>
 
         </form>

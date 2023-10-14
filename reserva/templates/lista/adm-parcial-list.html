@@ -3,7 +3,7 @@
 
             <tr>
                 <td>{{ solicitacao.usuario }}</td>
-                <td>{{ solicitacao.matricula }}</td>
+                <td>{{ solicitacao.usuario.matricula }}</td>
 
                 {% if solicitacao.status == 'PEN' %}
                     <td><i class="fa-regular fa-circle"></i>  {{ solicitacao.get_status_display }}</td>

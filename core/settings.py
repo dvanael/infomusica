@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'fontawesomefree',
 ]
 
-
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
