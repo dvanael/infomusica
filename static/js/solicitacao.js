@@ -38,11 +38,11 @@ $(function(){
     $("#modal-evento").on("submit", ".js-create-form", saveForm);
 
     // UPDATE
-    $("#table-evento").on("click", ".js-update", loadForm);
+    $(".table-evento").on("click", ".js-update", loadForm);
     $("#modal-evento").on("submit", ".js-update-form", saveForm);
 
     // DELETE
-	$("#table-evento").on("click", ".js-delete", loadForm);
+	$(".table-evento").on("click", ".js-delete", loadForm);
 	$("#modal-evento").on("submit", ".js-delete-form", saveForm);
 
 
