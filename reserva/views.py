@@ -31,7 +31,13 @@ def save_form(request, form, template_name):
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
-            solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+            
+            if request.user.groups.filter(name = u'Admin'):
+                solicitacoes = Solicitacao.objects.filter().order_by('-post')
+
+            else:
+                solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+            
             paginator = Paginator(solicitacoes, 7)
             page = request.GET.get('page')
 
@@ -70,12 +76,10 @@ def solicitacao_update(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     if request.method == 'POST':
         form = SolicitacaoForm(request.POST, instance=solicitacao)
-        form.instance.usuario = Perfil.objects.get(user=request.user)
         form.instance.post = timezone.now()
         
     else:
         form = SolicitacaoForm(instance=solicitacao)
-        form.instance.usuario = Perfil.objects.get(user=request.user)
         form.instance.post = timezone.now()
 
     return save_form(request, form, "lista/parcial-update.html")
@@ -89,7 +93,13 @@ def solicitacao_delete(request, pk):
     if request.method == 'POST':
         solicitacao.delete()
         data['form_is_valid'] = True
-        solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+        
+        if request.user.groups.filter(name = u'Admin'):
+            solicitacoes = Solicitacao.objects.filter().order_by('-post')
+
+        else:
+            solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+
         paginator = Paginator(solicitacoes, 7)  
         page = request.GET.get('page')
 
