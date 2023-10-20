@@ -1,46 +1,9 @@
-{% for group in request.user.groups.all %}
-    {% for solicitacao in object_list %}
-        {% if group.name == 'Admin' %}
+{% for solicitacao in object_list %}
+
 
 <tr>
-    <td>{{ solicitacao.usuario }}</td>
-    <td>{{ solicitacao.usuario.matricula }}</td>
+    <td>{{solicitacao.usuario}}</td>
 
-    {% if solicitacao.status == 'PEN' %}
-        <td><i class="fa-regular fa-circle"></i>  {{ solicitacao.get_status_display }}</td>
-    {% elif solicitacao.status == 'APR' %}
-        <td><i class="fa-regular fa-circle-check" style="color: #5fce37;"></i> {{ solicitacao.get_status_display }}</td>
-    {% elif solicitacao.status == 'REJ' %}
-        <td><i class="fa-regular fa-circle-xmark" style="color: #ef5b5b;"></i> {{ solicitacao.get_status_display }}</td>
-    {%endif%}
-
-    <td>{{ solicitacao.justificativa }}</td>
-    <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
-    <td>{{ solicitacao.hora }}</td>
-    <td>{{ solicitacao.post|date:'d/m/Y - H:i'}}</td>
-    
-    <td>
-        <a 
-        title="Status"
-        class="btn btn-success btn-sm"
-        href="{% url 'status-solicitacao' solicitacao.pk %}">Status</a>
-        
-        <button 
-        type="button"
-        class="btn btn-secondary btn-sm mx-1 js-update"
-        data-url="{% url 'js-editar' solicitacao.pk %}"><i class="fa-solid fa-pen"></i> Editar</button> 
-                    
-        <button 
-        type="button" 
-        class="btn btn-danger btn-sm mx-1 js-delete" 
-        data-url="{% url 'js-excluir' solicitacao.pk %}"><i class="fa-solid fa-trash"></i> Excluir</button>
-    
-    </td>
-</tr>
-
-
-    {%else%}
-<tr>
     {% if solicitacao.status == 'PEN' %}
         <td><i class="fa-regular fa-circle"></i>  {{ solicitacao.get_status_display }}</td>
     {% elif solicitacao.status == 'APR' %}
@@ -66,13 +29,10 @@
     
     </td>
 </tr>
-        
-        {%endif%}
-
-        {% empty %}
+            
+{% empty %}
 <tr>
     <td colspan="5"> Não há Solicitações.</td>
 </tr>
-
-    {%endfor%}
-{%endfor%}
+{% endfor %}
+ 
