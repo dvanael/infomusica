@@ -1,8 +1,6 @@
 {% for solicitacao in object_list %}
 
-
 <tr>
-    <td>{{solicitacao.usuario}}</td>
 
     {% if solicitacao.status == 'PEN' %}
         <td><i class="fa-regular fa-circle"></i>  {{ solicitacao.get_status_display }}</td>
@@ -35,4 +33,3 @@
     <td colspan="5"> Não há Solicitações.</td>
 </tr>
 {% endfor %}
- 
