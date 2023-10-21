@@ -48,7 +48,11 @@ def save_form(request, form, template_name):
             except EmptyPage:
                 solicitacoes = paginator.page(paginator.num_pages)
 
-            data['html_list'] = render_to_string("lista/parcial-list.html", {'object_list': solicitacoes})
+
+            if request.user.groups.filter(name = u'Admin'):
+                data['html_list'] = render_to_string("lista/adm-parcial-list.html", {'object_list': solicitacoes})
+            else:
+                data['html_list'] = render_to_string("lista/parcial-list.html", {'object_list': solicitacoes})
         else:
             data['form_is_valid'] = False
 
@@ -110,7 +114,10 @@ def solicitacao_delete(request, pk):
         except EmptyPage:
             solicitacoes = paginator.page(paginator.num_pages)
 
-        data['html_list'] = render_to_string('lista/parcial-list.html', {'object_list': solicitacoes})
+        if request.user.groups.filter(name = u'Admin'):
+            data['html_list'] = render_to_string("lista/adm-parcial-list.html", {'object_list': solicitacoes})
+        else:
+            data['html_list'] = render_to_string("lista/parcial-list.html", {'object_list': solicitacoes})  
     else:
         context = {'solicitacao': solicitacao}
         data['html_form'] = render_to_string('lista/parcial-delete.html', context, request=request)
@@ -188,6 +195,8 @@ class UsuarioList(GroupRequiredMixin, ListView):
     model = Perfil
     template_name = 'lista/usuario.html'
     content_object_name = 'object_list'
+
+    paginate_by = 7
     
 
 # -- CRUD DE SOLICITÇÕES --
@@ -312,4 +321,3 @@ class StatusUpdate(GroupRequiredMixin, UpdateView):
         self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
         return self.object
        
-
