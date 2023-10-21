@@ -74,6 +74,10 @@
                 <th>Postado em</th>
                 <th>Opções</th>
             </thead>
+
+            <tbody>
+                {%  include 'lista/adm-parcial-list.html'  %}
+            </tbody>
     {%else%}
             <thead class="text-uppercase">
                 <th>Status</th>
@@ -82,12 +86,14 @@
                 <th>Hora</th>
                 <th>Opções</th>
             </thead>
+
+            <tbody>
+                {% include 'lista/parcial-list.html' %}
+            </tbody>
             
     {%endif%}
     {%endfor%}
-            <tbody>
-                {%  include 'lista/parcial-list.html'  %}    
-            </tbody>
+            
         </table>
     </div>
 
