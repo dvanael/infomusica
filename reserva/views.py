@@ -15,7 +15,7 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DeleteVie
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
-from .forms import UsuarioForm, PerfilForm, SolicitacaoForm
+from .forms import UsuarioForm, PerfilForm, SolicitacaoForm, StatusForm
 from .models import Solicitacao, Perfil
 
 # -- INDEX --
@@ -123,6 +123,20 @@ def solicitacao_delete(request, pk):
         data['html_form'] = render_to_string('lista/parcial-delete.html', context, request=request)
     
     return JsonResponse(data)
+
+# AJAX STATUS UPDATE
+def status_update(request, pk):
+    solicitacao = get_object_or_404(Solicitacao, pk=pk)
+    if request.method == 'POST':
+        form = StatusForm(request.POST, instance=solicitacao)
+        form.instance.post = timezone.now()
+        
+    else:
+        form = StatusForm(instance=solicitacao)
+        form.instance.post = timezone.now()
+
+    return save_form(request, form, "lista/status-parcial-update.html")
+
 
 
 # -- CRUD DE USUARIO -- 

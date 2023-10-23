@@ -7,8 +7,9 @@
 {% endblock %}
 
 {% block conteudo %}
-<div class="container">
-    <div class="my-5 mx-auto top-50 p-5  text-white " id="box">
+<div class="container fluid">
+<div class="container" id="login">
+    <div class="my-5 mx-auto top-50 p-5 text-white " id="box">
     <h3>{{Titulo}}</h3>
     <p class='lead'> Preencha todos os campos obrigatórios.</p>
 
@@ -22,12 +23,13 @@
 
 
         <div class="row">
-            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-dark mx-auto col-md-5">Voltar</a>
-            <button type="submit" class="btn btn-success mx-auto col-md-5"> Enviar</button>
+            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-dark mx-auto col-md-5 butao">Voltar</a>
+            <button type="submit" class="btn btn-success mx-auto col-md-5 butao"> Enviar</button>
         </div>
     </form>
        
     </div>
+</div>
 </div>
 {% endblock %}
 

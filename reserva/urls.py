@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import IndexView, SolicitacaoCreate, SolicitacaoDelete, SolicitacaoUpdate, SolicitacaoList, StatusUpdate
 from .views import register, UsuarioDelete, UsuarioList, UsuarioUpdate
-from .views import solicitacao_create, solicitacao_update, solicitacao_delete
+from .views import solicitacao_create, solicitacao_update, solicitacao_delete, status_update
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -27,6 +27,9 @@ urlpatterns = [
     path('js/criar/', solicitacao_create, name = 'js-criar'),
     path('js/editar/<int:pk>/', solicitacao_update, name='js-editar'),
     path('js/excluir/<int:pk>/', solicitacao_delete, name='js-excluir'),
+
+
+    path('js/editar-status/<int:pk>/', status_update, name='js-editar-status'),
 
     #ADMIN
     path('status-solicitacao/<int:pk>', StatusUpdate.as_view(), name = 'status-solicitacao'),

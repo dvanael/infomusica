@@ -27,3 +27,18 @@ class SolicitacaoForm(forms.ModelForm):
     class Meta:
         model = Solicitacao
         fields = ('justificativa', 'data', 'hora')
+        widgets = {
+            "data": forms.DateInput(
+                attrs={'type': 'date', 'class': 'form-control'},
+                format="%d-%m-%Y",
+            ),
+            "hora": forms.TimeInput(
+                attrs={'type': 'time', 'class': 'form-control'},
+                format="%H:%M",
+            ),
+        }
+
+class StatusForm(forms.ModelForm):
+    class Meta:
+        model = Solicitacao
+        fields = ('status', 'justificativa')

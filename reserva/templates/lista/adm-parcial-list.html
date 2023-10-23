@@ -3,43 +3,48 @@
 <tr>
     <td>{{solicitacao.usuario}}</td>
     <td>{{solicitacao.usuario.matricula}}</td>
-        
-    {% if solicitacao.status == 'PEN' %}
-        <td><i class="fa-regular fa-circle"></i>  {{ solicitacao.get_status_display }}</td>
-    {% elif solicitacao.status == 'APR' %}
-        <td><i class="fa-regular fa-circle-check" style="color: #5fce37;"></i> {{ solicitacao.get_status_display }}</td>
-    {% elif solicitacao.status == 'REJ' %}
-        <td><i class="fa-regular fa-circle-xmark" style="color: #ef5b5b;"></i> {{ solicitacao.get_status_display }}</td>
+
+    <td>
+    {% if solicitacao.status.id == 1 %}
+        <i class="fa-regular fa-circle"></i>  
+    {% elif solicitacao.status.id == 2 %}
+        <i class="fa-regular fa-circle-xmark red"></i>  
+    {% elif solicitacao.status.id == 3 %}
+        <i class="fa-regular fa-circle-check green"></i>  
     {%endif%}
 
+    {{solicitacao.status}}</td>
+    
     <td>{{ solicitacao.justificativa }}</td>
     <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
     <td>{{ solicitacao.hora }}</td>
     <td>{{solicitacao.post|date:'d/m/Y - H:i'}}</td>
                 
     <td>
-        <a 
-        title="Status"
-        class="btn btn-success btn-sm"
-        href="{% url 'status-solicitacao' solicitacao.pk %}">Status</a>
+        <div class="d-flex">
+        <button 
+        type="button"
+        class="btn btn-success btn-sm mx-auto js-update"
+        data-url="{% url 'js-editar-status' solicitacao.pk %}">
+        Status</button> 
 
         <button 
         type="button"
-        class="btn btn-secondary btn-sm mx-1 js-update"
+        class="btn btn-secondary btn-sm mx-auto js-update"
         data-url="{% url 'js-editar' solicitacao.pk %}"><i class="fa-solid fa-pen"></i>
         Editar</button> 
                     
         <button 
         type="button" 
-        class="btn btn-danger btn-sm mx-1 js-delete" 
+        class="btn btn-danger btn-sm mx-auto js-delete" 
         data-url="{% url 'js-excluir' solicitacao.pk %}"><i class="fa-solid fa-trash"></i>
         Excluir</button>
-    
+    </div>
     </td>
 </tr>
             
 {% empty %}
 <tr>
-    <td colspan="5"> Não há Solicitações.</td>
+    <td colspan="8"> Não há Solicitações.</td>
 </tr>
 {% endfor %}

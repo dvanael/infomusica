@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 
-<form method="post" action="{% url 'js-criar' %}" class="js-create-form" >
+<form method="post" action="{% url 'js-criar' %}" class="js-create-form" id="modalSolicitacao" data-bs-theme="dark">
     {% csrf_token %}
 
     <div class="modal-header">

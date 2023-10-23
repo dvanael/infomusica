@@ -44,4 +44,6 @@ $(function(){
     // DELETE
 	$("#table-evento").on("click", ".js-delete", loadForm);
 	$("#modal-evento").on("submit", ".js-delete-form", saveForm);
+
+
 });

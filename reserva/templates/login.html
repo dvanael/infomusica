@@ -13,7 +13,8 @@
 {% endblock %}
 
 {% block conteudo %}
-<div class="container ">
+<div class="container fluid">
+<div class="container">
     <div class="my-5 mx-auto top-50 p-5 text-white " id="box">
         {% if request.user.is_authenticated %}
         <h3>
@@ -33,17 +34,18 @@
             {{ form|crispy }}
 
         <div class="row"> 
-            <a class="col-md-5 mx-auto btn btn-dark" href="{% url 'registrar' %}">
+            <a class="col-md-5 mx-auto btn btn-dark butao" href="{% url 'registrar' %}">
                 CRIAR CONTA</a>
 
-            <button type="submit" class="col-md-5 mx-auto btn btn-success">
+            <button type="submit" class="col-md-5 mx-auto btn btn-success butao">
                 ENTRAR</button>
 
         </form>
         {% endif %}
         
         </div>
-    </div>        
+    </div>
+</div>        
 </div>
 {% endblock %}
 

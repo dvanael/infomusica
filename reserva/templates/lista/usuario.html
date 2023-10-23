@@ -7,7 +7,7 @@
 
 {% block conteudo %}
 <div class="container my-3">
-    <h1>Lista de Usuarios</h1>
+    <h1>Lista de Usuários</h1>
 
     <hr>
 
@@ -67,7 +67,7 @@
                 <a class="page-link text-white bg-dark" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
             {%else%}
             <li class="page-item disabled">
-                <a class="page-link text-ligth bg-dark" href="#">ANTERIOR</a>
+                <a class="page-link text-white-50 bg-dark" href="#">ANTERIOR</a>
             {%endif%}
             </li>
 
@@ -82,7 +82,7 @@
                 <a class="page-link text-white bg-dark" href="?page={{ page_obj.next_page_number }}">PRÓXIMA</a>
             {%else%}
             <li class="page-item disabled">
-                <a class="page-link text-ligth bg-dark" href="#">PRÓXIMA</a>
+                <a class="page-link text-white-50 bg-dark" href="#">PRÓXIMA</a>
             {%endif%}
             </li>
 
