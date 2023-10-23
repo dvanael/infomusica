@@ -37,7 +37,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-background: var(--low-colo0r);
+background: var(--low-color);
 }
 
 /* Handle */
@@ -74,6 +74,10 @@ a:hover {
     color: var(--primary-color);
 }
 
+hr {
+    color: var(--mid-color);
+}
+
 h1 {
     color: var(--contrast-color);
     font-family: 'Chelsea Market';
@@ -100,11 +104,16 @@ footer {
     margin-top: 1%;
 }
 
+#profileContainer {
+    color: var(--contrast-color);
+    margin-top: 1%;
+    padding-top: 2%;
+    padding-left: 1%;
+    padding-bottom: 4%;
+}
+
 #box{
     width: 550px ;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 50px;
 }
 
 #modalSolicitacao {
@@ -200,10 +209,19 @@ padding-bottom: 1%;
     min-height: 100vh;
     width: 100%;
 }
-hr.h-color{
+.sidenavbar hr.h-color{
     background: var(--secondary-color);
 }
 
+#tableProfile td{
+    background-color: var(--main-color);
+    color: var(--contrast-color);
+    font-size: large;
+}
+
+#cardEditProfile {
+    background-color: var(--deep-color);
+}
 
 @media(max-width: 767px){
     #sideNavbar{
@@ -216,4 +234,44 @@ hr.h-color{
     #sideNavbar.active{
         margin-left: 0;
         }
+}
+
+.form-text {
+    color: var(--primary-color);
+    font-size: small ;
+}
+
+.asteriskField {
+    color: lightcoral;
+}
+
+.form-control {
+    background-color: var(--deep-color);
+    border-width: 1%;
+    border-color: var(--mid-color);
+    color: var(--contrast-color);
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--deep-color);
+    --bs-tooltip-color: var(--secondary-color);
+    font-size: large;
+}
+
+
+#page-top, #page-top h1, #page-top a{
+    color: var(--contrast-color)
+} 
+
+#indexNavbar{
+    background-color: var(--main-color);
+}
+
+#titleIndex{
+    text-shadow: 0 0 3px #000, 0 0 5px #000;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 20%; 
+    padding-bottom: 20%;
 }

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from django.contrib.auth.models import User, Group
-from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User, Group 
+from django.contrib.auth import authenticate, login, forms, views
 
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -15,12 +15,17 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DeleteVie
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
-from .forms import UsuarioForm, PerfilForm, SolicitacaoForm, StatusForm
+from .forms import UsuarioForm, PerfilForm, ProfileEditForm, SolicitacaoForm, StatusForm
 from .models import Solicitacao, Perfil
 
 # -- INDEX --
 class IndexView(TemplateView):
     template_name = 'index.html'
+
+class DashboardView(TemplateView):
+    group_required = [u'Admin']
+    login_url = reverse_lazy('login')
+    template_name = 'dashboard.html'
 
 # -- FUNÇÕES DO AJAX -- 
 # SAVE FORM
@@ -211,7 +216,24 @@ class UsuarioList(GroupRequiredMixin, ListView):
     content_object_name = 'object_list'
 
     paginate_by = 7
+
+# EDIT PROFILE
+class ProfileEdit(UpdateView):
+    form_class = ProfileEditForm
+    template_name = 'profile.html'    
+    success_url = reverse_lazy('inicio')
+
+    def get_object(self):
+        return self.request.user
     
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['Titulo'] = "Meu Perfil"
+        return context
+
+class PasswordEdit(views.PasswordChangeView):
+    form_class = forms.PasswordChangeForm
+    success_url = reverse_lazy('perfil')
 
 # -- CRUD DE SOLICITÇÕES --
 # CREATE
@@ -334,4 +356,3 @@ class StatusUpdate(GroupRequiredMixin, UpdateView):
     def get_object(self, query=None):
         self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
         return self.object
-       

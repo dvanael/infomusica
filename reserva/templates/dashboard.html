@@ -1,0 +1,26 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Página Inicial</title>
+{% endblock %}
+    
+{% block conteudo %}
+<div  class="container-fluid">
+    <div id="dashboardContainer" class="container">
+    <h1>
+        Página Inicial</h1>  
+    
+    <hr>
+    
+    <div class="d-flex align-items-center">
+            <a id="createButton" class="" href="{% url 'criar-solicitacao' %}">
+                <strong>Solicite um horário para reservar a Sala de Música.</strong></a>
+
+    </div>
+      
+    <hr>
+
+    </div>
+</div>
+{% endblock %}

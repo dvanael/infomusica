@@ -11,3 +11,5 @@ $(document).on('click', '.close-btn', function () {
 //     $(".sidebar ul li.active").removeClass('active');
 //     $(this).addClass('active');
 // });
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
