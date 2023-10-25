@@ -6,24 +6,26 @@
 {% endblock %}
 
 {% block conteudo %}
-<div class="container">
-    <div class="my-5 mx-auto top-50 p-5 text-white " id="box">
-    <h3>{{Titulo}}</h3>
-    <p class='lead'> Confirme para excluir o registro definitivamente.</p>
+<div class="container fluid">
+    <div class="container">
+        <div class=" mx-auto p-5">
+        <h3>{{Titulo}}</h3>
+        <p class='lead'> Confirme para excluir o registro definitivamente.</p>
 
-    <hr>
+        <hr>
 
-    <form action="" method="post">
-        {% csrf_token %}
+        <form action="" method="post">
+            {% csrf_token %}
 
-        <p>
-        Deseja excluir o registro: <b>{{ object }}</b>?</p>
+            <p>
+            Deseja excluir o registro: <b>{{ object }}</b>?</p>
 
         <div class="row">
-            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-dark mx-auto col-md-5">Voltar</a>
-            <button type="submit" class="btn btn-danger mx-auto col-md-5"> Excluir</button>
+                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-dark mx-auto col-md-5">Voltar</a>
+                <button type="submit" class="btn btn-danger mx-auto col-md-5"> Excluir</button>
+            </div>
+        </form>
         </div>
-    </form>
     </div>
 </div>
 {% endblock %}

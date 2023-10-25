@@ -8,9 +8,9 @@
 
 {% block conteudo %}
 <div class="container fluid">
-<div class="container" id="login">
-    <div class="my-5 mx-auto top-50 p-5 text-white " id="box">
-    <h3>{{Titulo}}</h3>
+<div class="container">
+    <div class="mx-auto p-5">
+    <h2>{{Titulo}}</h2>
     <p class='lead'> Preencha todos os campos obrigatórios.</p>
 
     <hr>
@@ -19,8 +19,6 @@
         {% csrf_token %}
 
         {{ form|crispy}}
-        {{ profile_form|crispy}}
-
 
         <div class="row">
             <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-dark mx-auto col-md-5 butao">Voltar</a>

@@ -15,16 +15,17 @@
 {% block conteudo %}
 <div class="container fluid">
 <div class="container">
-    <div class="my-5 mx-auto top-50 p-5 text-white " id="box">
+    <div id="loginContainer" class="mx-auto p-3 " >
         {% if request.user.is_authenticated %}
-        <h1>
-            Ação não permitida!</h1>
+        <h3>
+            Ação não permitida!</h3>
         <hr>
         <p class="lead">
             <b>Houve algum problema para processar a ação desejada ou você não tem permissão.</b></p>
-        <a href="{% url 'inicio' %}" class="btn btn-secondary text-dark"> VOLTAR AO INICIO</a>
+        <a href="{% url 'inicio' %}" class="btn btn-secondary"> VOLTAR AO INICIO</a>
 
         {% else %}
+
         <h1>
             LOGIN</h1>  
         <hr>

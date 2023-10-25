@@ -4,8 +4,9 @@
     <div class="sidebar" id="sideNavbar">
 
         <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
-            <h1 id="navbarLogo" class="fs-4"><span class="bg-white rounded shadow px-2 me-2"><i class="fa-solid fa-guitar text-dark"></i></span>
-                <span>iNFO MúSiCA</span></h1>
+            <h1 id="navbarLogo" class="fs-5">
+                <span class="bg-white rounded shadow px-2 me-2"><i class="fa-solid fa-guitar text-dark"></i></span>
+                iNFO MúSiCA</h1>
 
             <button class="btn d-md-none d-block close-btn px-2 py-0 pb-2">
                 <i class="fa-solid fa-xmark"></i></button>
@@ -13,7 +14,7 @@
 
         <ul class="list-unstyled px-2">
             <li><a href="{% url 'inicio'%}" class="text-decoration-none px-3 py-2 d-block">
-                <i class="fa-solid fa-house"></i></i> Inicio</a></li>
+                <i class="fa-solid fa-house"></i> Inicio</a></li>
 
             {% for group in request.user.groups.all %}
             {% if group.name == 'Admin' %}
@@ -49,7 +50,7 @@
                 
                 <div class="d-flex justify-content-between d-md-none d-block">
                  <button class="btn px-1 py-0 open-btn me-2"><i class="fa-solid fa-bars"></i></button>
-                    <a class="navbar-brand fs-4" href="{% url 'inicio'%}"><span class="bg-dark text-dark rounded px-2 py-1">
+                    <a class="navbar-brand fs-4" href="{% url 'inicio'%}"><span class="bg-dark rounded px-2 py-1">
                         <i class="fa-solid fa-guitar"></i></span></a>   
                 </div>
                 
@@ -60,7 +61,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0">
+                    <ul class="navbar-nav mb-2 mb-md-0">
 
                         {% if request.user.is_authenticated %}
                         <li class="nav-item dropdown-center">
@@ -68,8 +69,11 @@
                                 {{request.user}}
                               </a>
                             
-                              <ul id="profileNavbar" class="dropdown-menu dropdown-menu-end">
+                              <ul id="profileDropdown" class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{% url 'perfil' %}">Meu Perfil</a></li>
+                                
+                                 <hr class="h-color mx-2 my-1">
+
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                               </ul>
                         </li>

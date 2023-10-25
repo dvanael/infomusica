@@ -14,7 +14,7 @@
 
 {% block conteudo %}
 <div class="container">
-    <div class="my-5 mx-auto top-50 p-5 text-white" id="box">
+    <div class="my-5 mx-auto p-3">
     <h1>Criar Conta</h1>
     <p class='lead'> Preencha todos os campos obrigatórios.</p>
 
@@ -26,13 +26,10 @@
         {{ form|crispy}}
         {{ profile_form|crispy }}
 
-        <div class="row" id="btn_login"> 
-            <a class="col-md-5 mx-2 p-2 btn btn-dark" href="{% url 'login' %}">
+        <div class="row d-flex align-items-center"> 
+            <a class="col-md-5 mx-auto mt-3 p-2 btn btn-dark" href="{% url 'login' %}">
                 LOGIN</a>
-
-                <div class="col-md-1"></div>
-
-            <button type="submit" class="col-md-5 mx-2 p-2 btn btn-success">
+            <button type="submit" class="col-md-5 mx-auto mt-3 p-2 btn btn-success">
                 ENTRAR</button>
     </form>
     </div>
