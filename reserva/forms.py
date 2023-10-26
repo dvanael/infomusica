@@ -52,14 +52,8 @@ class SolicitacaoForm(forms.ModelForm):
         model = Solicitacao
         fields = ('justificativa', 'data', 'hora')
         widgets = {
-            "data": forms.DateInput(
-                attrs={'type': 'date', 'class': 'form-control',},
-                format="%d-%m-%Y",
-            ),
-            "hora": forms.TimeInput(
-                attrs={'type': 'time', 'class': 'form-control'},
-                format="%H:%M",
-            ),
+            "data": forms.DateInput(format = ('%Y-%m-%d'), attrs = {'type': 'date', 'class': 'form-control'}),
+            "hora": forms.TimeInput(format = "%H:%M", attrs = {'type': 'time', 'class': 'form-control'}),
             'justificativa': forms.TextInput(attrs={'placeholder': 'Justifique sua solicitação'})
         }
 

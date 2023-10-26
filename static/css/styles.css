@@ -345,4 +345,34 @@ footer {
     #dataSelect{
         font-size: 11px;
     }
+        
+    #calendar{
+        font-size: xx-small;
+    }
+
+}
+
+
+#calendar a:hover {
+    color: var(--primary-color);
+    background-color: var(--deep-color);
+    cursor: pointer;
+}
+
+#calendar td,#calendar tr, #calendar th, #calendar table{
+    border-color: var(--mid-color);
+}
+#calendar .fc-day-today{
+    background-color: var(--low-color);
+}
+
+#calendar .fc-day-other{
+    background-color: var(--deep-color);
+}
+#calendar .fc-popover{
+    background-color: var(--deep-color);
+
+}
+.popover {
+    color: var(--deep-color);
 }

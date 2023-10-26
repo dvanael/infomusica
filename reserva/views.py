@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -22,10 +24,17 @@ from .models import Solicitacao, Perfil
 class IndexView(TemplateView):
     template_name = 'index.html'
 
-class DashboardView(TemplateView):
-    group_required = [u'Admin']
+class DashboardView(GroupRequiredMixin, ListView):
+    group_required = [u'Aluno',u'Admin']
     login_url = reverse_lazy('login')
-    template_name = 'dashboard.html'
+    model = Solicitacao
+    template_name = 'dashboard.html'    
+    content_object_name = 'object_list'
+
+
+    def get_queryset(self):
+        queryset = self.model.objects.filter(status = 3)
+        return queryset    
 
 # -- FUNÇÕES DO AJAX -- 
 # SAVE FORM
@@ -38,7 +47,7 @@ def save_form(request, form, template_name):
             data['form_is_valid'] = True
             
             if request.user.groups.filter(name = u'Admin'):
-                solicitacoes = Solicitacao.objects.filter().order_by('-post')
+                solicitacoes = Solicitacao.objects.all().order_by('-post')
 
             else:
                 solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
@@ -71,12 +80,10 @@ def solicitacao_create(request):
     if request.method == 'POST':
         form = SolicitacaoForm(request.POST)
         form.instance.usuario = Perfil.objects.get(user=request.user)
-        form.instance.post = timezone.now()
 
     else:
         form = SolicitacaoForm()
         form.instance.usuario = Perfil.objects.get(user=request.user)
-        form.instance.post = timezone.now()
     
     return save_form(request, form, "lista/parcial-create.html")
 
@@ -85,11 +92,9 @@ def solicitacao_update(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     if request.method == 'POST':
         form = SolicitacaoForm(request.POST, instance=solicitacao)
-        form.instance.post = timezone.now()
         
     else:
         form = SolicitacaoForm(instance=solicitacao)
-        form.instance.post = timezone.now()
 
     return save_form(request, form, "lista/parcial-update.html")
 
@@ -104,7 +109,7 @@ def solicitacao_delete(request, pk):
         data['form_is_valid'] = True
         
         if request.user.groups.filter(name = u'Admin'):
-            solicitacoes = Solicitacao.objects.filter().order_by('-post')
+            solicitacoes = Solicitacao.objects.all().order_by('-post')
 
         else:
             solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
@@ -134,11 +139,9 @@ def status_update(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     if request.method == 'POST':
         form = StatusForm(request.POST, instance=solicitacao)
-        form.instance.post = timezone.now()
         
     else:
         form = StatusForm(instance=solicitacao)
-        form.instance.post = timezone.now()
 
     return save_form(request, form, "lista/status-parcial-update.html")
 
@@ -269,10 +272,6 @@ class SolicitacaoUpdate(GroupRequiredMixin, UpdateView):
         context['Titulo'] = "Editar Solicitação" 
         return context
 
-    def form_valid(self, form):
-        form.instance.post = timezone.now()
-        return super().form_valid(form)
-
     def get_object(self, query=None):
         if self.request.user.groups.filter(name = u'Admin'):
             self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
@@ -313,7 +312,7 @@ class SolicitacaoList(GroupRequiredMixin, ListView):
         
     def get_queryset(self):
         if self.request.user.groups.filter(name = u'Admin'):
-            self.object_list = Solicitacao.objects.filter().order_by('-post')
+            self.object_list = Solicitacao.objects.all().order_by('-post')
 
         else:
             self.object_list = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = self.request.user)).order_by('-post')
@@ -348,10 +347,6 @@ class StatusUpdate(GroupRequiredMixin, UpdateView):
         context = super().get_context_data(*args, **kwargs)
         context['Titulo'] = "Gerenciar Status" 
         return context
-
-    def form_valid(self, form):
-        form.instance.post = timezone.now()
-        return super().form_valid(form)
 
     def get_object(self, query=None):
         self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
