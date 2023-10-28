@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from .models import Solicitacao, Perfil
+
         
 # USUARIO FORM
 class UsuarioForm(UserCreationForm):
@@ -55,11 +56,12 @@ class ProfileEditForm(UserChangeForm):
 class SolicitacaoForm(forms.ModelForm):
     class Meta:
         model = Solicitacao
-        fields = ('justificativa', 'data', 'hora')
+        fields = ('justificativa', 'data', 'entry_hour', 'exit_hour')
         widgets = {
             "data": forms.DateInput(format = ('%Y-%m-%d'), attrs = {'type': 'date', 'class': 'form-control'}),
-            "hora": forms.TimeInput(format = "%H:%M", attrs = {'type': 'time', 'class': 'form-control'}),
-            'justificativa': forms.TextInput(attrs={'placeholder': 'Justifique sua solicitação'})
+            "entry_hour": forms.TimeInput(format = "%H:%M", attrs = {'type': 'time', 'class': 'form-control'}),
+            "exit_hour": forms.TimeInput(format = "%H:%M", attrs = {'type': 'time', 'class': 'form-control'}),
+            "justificativa": forms.TextInput(attrs={'placeholder': 'Justifique sua solicitação'})
         }
 
 class StatusForm(forms.ModelForm):

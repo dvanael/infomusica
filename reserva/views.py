@@ -28,9 +28,7 @@ class DashboardView(GroupRequiredMixin, ListView):
     group_required = [u'Aluno',u'Admin']
     login_url = reverse_lazy('login')
     model = Solicitacao
-    template_name = 'dashboard.html'    
-    content_object_name = 'object_list'
-
+    template_name = 'dashboard.html' 
 
     def get_queryset(self):
         queryset = self.model.objects.filter(status = 3)
@@ -244,7 +242,7 @@ class SolicitacaoCreate(GroupRequiredMixin, CreateView):
     group_required = [u'Aluno', u'Admin']
     login_url = reverse_lazy('login')
     model = Solicitacao
-    fields = ['justificativa', 'data', 'hora']
+    fields = ['justificativa', 'data', 'entry_hour', 'exit_hour']
     template_name = 'form.html'
     success_url = reverse_lazy('listar-solicitacao')
     
@@ -263,7 +261,7 @@ class SolicitacaoUpdate(GroupRequiredMixin, UpdateView):
     group_required = [u'Aluno', u'Admin']
     login_url = reverse_lazy('login')
     model = Solicitacao
-    fields = ['justificativa', 'data', 'hora']
+    fields = ['justificativa', 'data', 'entry_hour', 'exit_hour']
     template_name = 'form.html'
     success_url =  reverse_lazy('listar-solicitacao')
 
@@ -312,26 +310,26 @@ class SolicitacaoList(GroupRequiredMixin, ListView):
         
     def get_queryset(self):
         if self.request.user.groups.filter(name = u'Admin'):
-            self.object_list = Solicitacao.objects.all().order_by('-post')
+            queryset = Solicitacao.objects.all().order_by('-post')
 
         else:
-            self.object_list = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = self.request.user)).order_by('-post')
+            queryset = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = self.request.user)).order_by('-post')
             
         filtro_data = self.request.GET.get('filtro_data', None)
 
         if filtro_data == 'ultima_semana':
-            self.object_list = self.object_list.filter(data__gte=timezone.now() - timezone.timedelta(days=7))
+            queryset = queryset.filter(data__range=[timezone.now()- timezone.timedelta(days=7), timezone.now()])
 
         elif filtro_data == 'ultimo_mes':
-            self.object_list = self.object_list.filter(data__gte=timezone.now() - timezone.timedelta(days=30))
+            queryset = queryset.filter(data__range=[timezone.now()- timezone.timedelta(days=30), timezone.now()])
 
         elif filtro_data == 'prox_semana':
-            self.object_list = self.object_list.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=7)])
+            queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=7)])
 
         elif filtro_data == 'prox_mes':
-            self.object_list = self.object_list.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=30)])
+            queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=30)])
         
-        return self.object_list
+        return queryset
     
 
 # GERENCIAMENTO DE SOLICITAÇÕES

@@ -2,19 +2,22 @@
 
 <tr>
     <td>
+        <div class="d-flex  ">
     {% if solicitacao.status.id == 1 %}
-        <i class="fa-regular fa-circle"></i>  
+        <i class="fa-regular fa-circle mx-auto"></i>  
     {% elif solicitacao.status.id == 2 %}
-        <i class="fa-regular fa-circle-xmark" style="color: #ef5b5b;"></i>  
+        <i class="fa-regular fa-circle-xmark red mx-auto"></i>  
     {% elif solicitacao.status.id == 3 %}
-        <i class="fa-regular fa-circle-check" style="color: #5fce37;"></i>  
+        <i class="fa-regular fa-circle-check green mx-auto"></i>  
     {%endif%}
-
-    {{solicitacao.status}}</td>
+        </div>
+    <!-- {{ solicitacao.status }} -->
+    </td>
 
     <td>{{ solicitacao.justificativa }}</td>
     <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
-    <td>{{ solicitacao.hora }}</td>
+    <td>{{ solicitacao.entry_hour }}</td>
+    <td>{{ solicitacao.exit_hour }}</td>
                 
     <td>
         <div class="d-flex">

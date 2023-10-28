@@ -14,7 +14,7 @@
         <hr>
         
         <div class="d-flex align-items-center">
-                <a id="createButton" class="" href="{% url 'criar-solicitacao' %}">
+                <a class="" href="{% url 'criar-solicitacao' %}">
                     <strong>Solicite um horário para reservar a Sala de Música.</strong></a>
 
         </div>
@@ -53,9 +53,9 @@
             {% for solicitacao in object_list %}
                 {
                     title: '{{ solicitacao.usuario }}',
-                    start: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.hora}}',
-                    end: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.hora}}',
-                    extendedProps: {
+                    start: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.entry_hour}}',
+                    end: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.exit_hour}}',
+                    extendedProps: { 
                         justificativa: '{{ solicitacao.justificativa }}'
                     },
                 }, 

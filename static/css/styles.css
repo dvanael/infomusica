@@ -43,11 +43,12 @@
 /* Track */
 ::-webkit-scrollbar-track {
     background: var(--low-color);
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-background: var(--secondary-color);
+    background: var(--secondary-color);
     border-radius: 10px;
 }
 
@@ -64,10 +65,6 @@ body{
 
 }
 
-
-body p.lead{
-    font-size: 15px;
-}
 
 a {
 	transition: .3s all ease;
@@ -94,6 +91,11 @@ footer {
 
     
 }
+
+footer p.lead{
+    font-size: 15px;
+}
+
 
 /*  CONTAINER */
 #mainContainer {
@@ -307,7 +309,6 @@ footer {
 }
 
 
-
 .form-control{
     &:focus, &:active {
         color: var(--primary-color);
@@ -322,7 +323,7 @@ footer {
     color: var(--contrast-color);
     opacity: 0.5;
 }
-
+/* 
 .btn-primary {
     background-color: var(--toggle-color);
     border-color: var(--mid-color);
@@ -353,7 +354,7 @@ footer {
 
 .butao{
     justify-items: center;
-}
+} */
 
 .red {
     color: orangered;

@@ -25,7 +25,8 @@ class Solicitacao(models.Model):
     usuario = models.ForeignKey(Perfil, on_delete=models.CASCADE, verbose_name='Usuário')
     justificativa = models.CharField(default='', max_length=250, verbose_name='Justificativa')
     data = models.DateField(default=date.today, verbose_name='Data')
-    hora = models.TimeField(default=timezone.now, verbose_name='Hora')
+    entry_hour = models.TimeField(default=timezone.now, verbose_name='Hora de Entrada')
+    exit_hour = models.TimeField(default=timezone.now, verbose_name='Hora de Saída')
     post = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name='Post')
 
     def __str__(self):

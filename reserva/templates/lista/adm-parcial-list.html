@@ -5,19 +5,22 @@
     <td>{{solicitacao.usuario.matricula}}</td>
 
     <td>
+        <div class="d-flex  ">
     {% if solicitacao.status.id == 1 %}
-        <i class="fa-regular fa-circle"></i>  
+        <i class="fa-regular fa-circle mx-auto"></i>  
     {% elif solicitacao.status.id == 2 %}
-        <i class="fa-regular fa-circle-xmark red"></i>  
+        <i class="fa-regular fa-circle-xmark red mx-auto"></i>  
     {% elif solicitacao.status.id == 3 %}
-        <i class="fa-regular fa-circle-check green"></i>  
+        <i class="fa-regular fa-circle-check green mx-auto"></i>  
     {%endif%}
-
-    {{solicitacao.status}}</td>
+        </div>
+    <!-- {{ solicitacao.status }} -->
+    </td>
     
     <td>{{ solicitacao.justificativa }}</td>
     <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
-    <td>{{ solicitacao.hora }}</td>
+    <td>{{ solicitacao.entry_hour }}</td>
+    <td>{{ solicitacao.exit_hour }}</td>
     <td>{{solicitacao.post|date:'d/m/Y - H:i'}}</td>
                 
     <td>
