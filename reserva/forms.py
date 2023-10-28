@@ -23,6 +23,11 @@ class UsuarioForm(UserCreationForm):
         self.fields['email'].widget.attrs={'placeholder': 'Digite um e-mail válido'}
         self.fields['password1'].widget.attrs={'placeholder': 'Digite uma senha'}
         self.fields['password2'].widget.attrs={'placeholder': 'Confirme sua senha'}
+        
+        self.fields['username'].help_text = ''
+        self.fields['email'].help_text = ''
+        self.fields['password1'].help_text = ''
+        self.fields['password2'].help_text = ''
     
 class PerfilForm(forms.ModelForm):
     class Meta:
