@@ -31,3 +31,4 @@ class Solicitacao(models.Model):
 
     def __str__(self):
         return "Solicitação de {} ({}) - {}".format(self.usuario, self.status, self.data)  
+    
