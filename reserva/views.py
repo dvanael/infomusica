@@ -34,7 +34,8 @@ class DashboardView(GroupRequiredMixin, ListView):
         queryset = self.model.objects.filter(status = 3)
         return queryset    
 
-# -- FUNÇÕES DO AJAX -- 
+# -- SOLICITACAO CRUD --
+# -- FUNCTION BASED VIEWS -- 
 # SAVE FORM
 def save_form(request, form, template_name):
     data = dict()
@@ -48,7 +49,7 @@ def save_form(request, form, template_name):
                 solicitacoes = Solicitacao.objects.all().order_by('-post')
 
             else:
-                solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+                solicitacoes = Solicitacao.objects.filter(profile = Perfil.objects.get(user = request.user)).order_by('-post')
             
             paginator = Paginator(solicitacoes, 7)
             page = request.GET.get('page')
@@ -73,19 +74,19 @@ def save_form(request, form, template_name):
 
     return JsonResponse(data)
 
-# AJAX CREATE
+# SOLICITACO CREATE
 def solicitacao_create(request):
     if request.method == 'POST':
         form = SolicitacaoForm(request.POST)
-        form.instance.usuario = Perfil.objects.get(user=request.user)
+        form.instance.profile = Perfil.objects.get(user=request.user)
 
     else:
         form = SolicitacaoForm()
-        form.instance.usuario = Perfil.objects.get(user=request.user)
+        form.instance.profile = Perfil.objects.get(user=request.user)
     
     return save_form(request, form, "lista/parcial-create.html")
 
-# AJAX UPDATE
+# SOLICITACAO UPDATE
 def solicitacao_update(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     if request.method == 'POST':
@@ -97,7 +98,7 @@ def solicitacao_update(request, pk):
     return save_form(request, form, "lista/parcial-update.html")
 
 
-# AJAX DELETE
+# SOLICITACAO DELETE
 def solicitacao_delete(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     data = dict()
@@ -110,7 +111,7 @@ def solicitacao_delete(request, pk):
             solicitacoes = Solicitacao.objects.all().order_by('-post')
 
         else:
-            solicitacoes = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = request.user)).order_by('-post')
+            solicitacoes = Solicitacao.objects.filter(profile = Perfil.objects.get(user = request.user)).order_by('-post')
 
         paginator = Paginator(solicitacoes, 7)  
         page = request.GET.get('page')
@@ -132,7 +133,7 @@ def solicitacao_delete(request, pk):
     
     return JsonResponse(data)
 
-# AJAX STATUS UPDATE
+# SOLICITACAO STATUS UPDATE
 def status_update(request, pk):
     solicitacao = get_object_or_404(Solicitacao, pk=pk)
     if request.method == 'POST':
@@ -143,7 +144,50 @@ def status_update(request, pk):
 
     return save_form(request, form, "lista/status-parcial-update.html")
 
+# -- CLASS BASED VIEWS -- 
 
+# LIST
+class SolicitacaoList(GroupRequiredMixin, ListView):
+    group_required = [u'Aluno', u'Admin']
+    login_url = reverse_lazy('login')
+    model = Solicitacao
+    template_name = 'lista/solicitacao.html'
+    content_object_name = 'object_list'
+
+    paginate_by = 7
+        
+    def get_queryset(self):
+        if self.request.user.groups.filter(name = u'Admin'):
+            queryset = Solicitacao.objects.all().order_by('-post')
+
+        else:
+            queryset = Solicitacao.objects.filter(profile = Perfil.objects.get(user = self.request.user)).order_by('-post')
+            
+        filtro_data = self.request.GET.get('filtro_data', None)
+
+        if filtro_data == 'ultima_semana':
+            queryset = queryset.filter(data__range=[timezone.now()- timezone.timedelta(days=7), timezone.now()])
+
+        elif filtro_data == 'ultimo_mes':
+            queryset = queryset.filter(data__range=[timezone.now()- timezone.timedelta(days=30), timezone.now()])
+
+        elif filtro_data == 'prox_semana':
+            queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=7)])
+
+        elif filtro_data == 'prox_mes':
+            queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=30)])
+        
+        return queryset
+    
+class SolicitacaoDetail(GroupRequiredMixin, ListView):
+    group_required = [u'Aluno', u'Admin']
+    login_url = reverse_lazy('login')
+    model = Solicitacao
+    template_name = 'lista/detail.html'
+
+    def get_queryset(self): 
+        queryset = self.model.objects.get(pk = self.kwargs['pk'])
+        return queryset
 
 # -- CRUD DE USUARIO -- 
 # REGISTRO
@@ -235,117 +279,3 @@ class ProfileEdit(UpdateView):
 class PasswordEdit(views.PasswordChangeView):
     form_class = forms.PasswordChangeForm
     success_url = reverse_lazy('perfil')
-
-# -- CRUD DE SOLICITÇÕES --
-# CREATE
-class SolicitacaoCreate(GroupRequiredMixin, CreateView):
-    group_required = [u'Aluno', u'Admin']
-    login_url = reverse_lazy('login')
-    model = Solicitacao
-    fields = ['justificativa', 'data', 'entry_hour', 'exit_hour']
-    template_name = 'form.html'
-    success_url = reverse_lazy('listar-solicitacao')
-    
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['Titulo'] = "Criar Solicitação" 
-        return context
-
-    def form_valid(self, form):
-        form.instance.usuario = Perfil.objects.get(user=self.request.user)
-        url = super().form_valid(form)
-        return url 
-
-# UPDATE
-class SolicitacaoUpdate(GroupRequiredMixin, UpdateView):
-    group_required = [u'Aluno', u'Admin']
-    login_url = reverse_lazy('login')
-    model = Solicitacao
-    fields = ['justificativa', 'data', 'entry_hour', 'exit_hour']
-    template_name = 'form.html'
-    success_url =  reverse_lazy('listar-solicitacao')
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['Titulo'] = "Editar Solicitação" 
-        return context
-
-    def get_object(self, query=None):
-        if self.request.user.groups.filter(name = u'Admin'):
-            self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
-            return self.object
-        else:
-            self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'], usuario = self.request.user)
-            return self.object
-
-# DELETE 
-class SolicitacaoDelete(GroupRequiredMixin, DeleteView):
-    group_required = [u'Aluno', u'Admin']
-    login_url = reverse_lazy('login')
-    model = Solicitacao
-    template_name = 'form-excluir.html'
-    success_url = reverse_lazy('listar-solicitacao')
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['Titulo'] = "Excluir Solicitação" 
-        return context
-
-    def get_object(self, query=None):
-        if self.request.user.groups.filter(name = u'Admin'):
-            self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
-            return self.object
-        else:
-            self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'], usuario = self.request.user)
-            return self.object
-# LIST
-class SolicitacaoList(GroupRequiredMixin, ListView):
-    group_required = [u'Aluno', u'Admin']
-    login_url = reverse_lazy('login')
-    model = Solicitacao
-    template_name = 'lista/solicitacao.html'
-    content_object_name = 'object_list'
-
-    paginate_by = 7
-        
-    def get_queryset(self):
-        if self.request.user.groups.filter(name = u'Admin'):
-            queryset = Solicitacao.objects.all().order_by('-post')
-
-        else:
-            queryset = Solicitacao.objects.filter(usuario = Perfil.objects.get(user = self.request.user)).order_by('-post')
-            
-        filtro_data = self.request.GET.get('filtro_data', None)
-
-        if filtro_data == 'ultima_semana':
-            queryset = queryset.filter(data__range=[timezone.now()- timezone.timedelta(days=7), timezone.now()])
-
-        elif filtro_data == 'ultimo_mes':
-            queryset = queryset.filter(data__range=[timezone.now()- timezone.timedelta(days=30), timezone.now()])
-
-        elif filtro_data == 'prox_semana':
-            queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=7)])
-
-        elif filtro_data == 'prox_mes':
-            queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=30)])
-        
-        return queryset
-    
-
-# GERENCIAMENTO DE SOLICITAÇÕES
-class StatusUpdate(GroupRequiredMixin, UpdateView):
-    group_required = [u'Admin']
-    login_url = reverse_lazy('login')
-    model = Solicitacao
-    fields = ['status', 'justificativa']
-    template_name = 'form.html'
-    success_url = reverse_lazy('listar-solicitacao')
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['Titulo'] = "Gerenciar Status" 
-        return context
-
-    def get_object(self, query=None):
-        self.object = get_object_or_404(Solicitacao, pk = self.kwargs['pk'])
-        return self.object

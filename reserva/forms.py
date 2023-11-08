@@ -52,7 +52,7 @@ class ProfileEditForm(UserChangeForm):
         self.fields['email'].help_text = ''
         self.fields['password'].widget = forms.HiddenInput()
 
-# AJAX SOLICITACAO FORM
+# SOLICITACAO FORM
 class SolicitacaoForm(forms.ModelForm):
     class Meta:
         model = Solicitacao
@@ -67,4 +67,12 @@ class SolicitacaoForm(forms.ModelForm):
 class StatusForm(forms.ModelForm):
     class Meta:
         model = Solicitacao
-        fields = ('status', 'justificativa')
+        fields = ('status', 'justify_status')
+        labels = {
+            'status': 'Selecione um status',  # Rótulo personalizado para o campo 'status'
+            'justify_status': 'Justificar Status'  # Rótulo personalizado para o campo 'justify_status'
+        }
+        
+    def __init__(self, *args, **kwargs):
+        super(StatusForm, self).__init__(*args, **kwargs)
+        self.fields['justify_status'].help_text = 'Justifique o porque do status selecionado.'

@@ -13,17 +13,14 @@
     <hr>
 
     <div class="row d-flex align-items-center">
-		<div class="col-md-9 col-sm-7 my-1 me-auto">
+		<div class="col-md-9 col-sm-7 my-1 me-auto text-start">
 
             <!-- Filtro de Data -->
-                <select id="dataSelect" class="form-select" 
-                        data-bs-toggle="tooltip" 
-                        data-bs-placement="top"
-                        data-bs-custom-class="custom-tooltip"
-                        data-bs-title="Filtro de Data" 
-                        id="floatingSelect" 
-                        aria-label="Select Menu" 
-                        onchange="window.location.href=this.value;" >
+            <div class="d-flex align-items-center">
+            <span for="dataSelect" class="text-start">Filtro de Data</span>
+
+                <select id="dataSelect" class="form-select mx-2" onchange="window.location.href=this.value;" >
+
                     <option value="?filtro_data=todas" {% if 'todas' in request.GET.filtro_data|default:'' %}selected{% endif %}>
                         Todas</option>
                     <option value="?filtro_data=ultima_semana" {% if 'ultima_semana' in request.GET.filtro_data %}selected{% endif %}>
@@ -35,6 +32,8 @@
                     <option value="?filtro_data=prox_mes" {% if 'prox_mes' in request.GET.filtro_data %}selected{% endif %}>
                         Próximo mês</option>
                 </select>
+            </div>
+                
 		</div>
 		<div class="col-md-3 col-sm-5 my-1 ms-auto">
 
@@ -64,6 +63,7 @@
                 <th>Matricula</th>
                 <th>Status</th>
                 <th>Justificativa</th>
+                <th>Justificativa Status</th>
                 <th>Data</th>
                 <th>Entrada</th>
                 <th>Saída</th>

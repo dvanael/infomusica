@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Poppins:wght@300;400;500;600&display=swap');
 
 :root{
+    --deep-color: #101010;
+    --main-color:#181818   ;
+    --low-color:#5b5b5b;
+    --mid-color: #7e7e7e ;
+    --secondary-color: #e3e3e3 ;
+    --primary-color: #c3c6d7;
+    --toggle-color: #3655f5 ;
+    --contrast-color: #fefefe; 
+}
+/* 
+:root{
     --deep-color: #0a0d10;
     --main-color:#14151C   ;
     --low-color:#282F4F;
@@ -10,8 +21,7 @@
     --toggle-color: #3655f5 ;
     --contrast-color: #f5fcfd; 
 }
-
-
+ */
 .cores-doidas-1-hex { color: #E8FFF3; }
 .cores-doidas-2-hex { color: #283340; }
 
@@ -65,7 +75,6 @@ body{
 
 }
 
-
 a {
 	transition: .3s all ease;
     color: var(--contrast-color);
@@ -80,9 +89,6 @@ hr {
     color: var(--mid-color);
 }
 
-h1, h2, h3 {
-    font-family: 'Mochiy Pop One';
-}
 
 footer {
     background-color: var(--low-color);
@@ -125,23 +131,29 @@ footer p.lead{
     padding-top: 1%;
     padding-bottom: 1%;
     z-index: 2;
+    font-size: 13px;
 }
 
 #navbarLogo {
-    font-family: 'Mochiy Pop One';
     margin-left: 1%;
 }
+#navbarLogo a:hover {
+    text-decoration: none;
+    color: var(--contrast-color);
+}
 
-#sideNavbar a{
+
+#sidebarItem a{
     color: var(--primary-color);
     border-radius: 10px;
     padding-left: 3%;
 }
 
-#sideNavbar a:hover {
+#sidebarItem a:hover {
     background-color: var(--secondary-color);
     color: var(--deep-color);
-}   
+    font-weight: bold;
+}
 
 #topNavbar {
     background-color: var(--low-color);
@@ -174,7 +186,7 @@ footer p.lead{
     background-color: var(--deep-color);
     border-color:  var(--mid-color);
     color: var(--contrast-color);
-    width: 300px;
+    width: 200px;
 }
 
 /*  PROFILE */
@@ -229,11 +241,12 @@ footer p.lead{
     padding-top: 20%; 
     padding-bottom: 20%;
 }
+
 #titleIndex h1, #titleIndex h3{
     text-shadow: 0 0 10px #000, 0 0 10px #000;
 }
 .index-image{
-    width: 150%;
+    width: 200%;
     height: 150%;
 }
 
@@ -357,10 +370,10 @@ footer p.lead{
 } */
 
 .red {
-    color: orangered;
+    color: #ff6a6a;
 }
 .green {
-    color: greenyellow
+    color: #48E15D;
 }
 
 
@@ -378,7 +391,7 @@ footer p.lead{
         margin-left: -250px;
         position: absolute;
         min-height: 100vh;
-        z-index: 1;
+        z-index: 1000;
 
     }
     #sideNavbar.active{
@@ -441,6 +454,11 @@ footer p.lead{
 
 }
 
+
+#calendar{
+    border: var(--mid-color) 3px solid;
+    padding: 2% 1% 0 1%;
+}
 
 #calendar a:hover {
     color: var(--primary-color);

@@ -12,14 +12,14 @@
 <div id="page-top" class="container-fluid">
     <nav id="indexNavbar" class="navbar navbar-expand-lg fixed-top">
         <div class="container px-5">
-            <a class="navbar-brand" href="#page-top"><h1 id="navbarLogo" class="fs-5">
+            <a class="navbar-brand" href="{% url 'inicio' %}"><h1 id="navbarLogo" class="fs-5">
                 <span class="bg-white rounded shadow px-2 me-2"><i class="fa-solid fa-guitar text-dark"></i></span>
                 iNFO MúSiCA</h1></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-solid fa-bars text-white"></i></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'registrar' %}">Sing up</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'registrar' %}">Sign up</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{% url 'logout' %}">Login</a></li>
                 </ul>
             </div>
@@ -27,7 +27,7 @@
     </nav>
     <!-- Header-->
     
-    <header id="titleIndex" class="masthead text-center text-white" style="background-image: url({% static 'img/bg-index.png'%})">
+    <header id="titleIndex" class="masthead text-center" style="background-image: url({% static 'img/bg-index.png'%})">
         <div class="masthead-content">
             <div class="container px-5">
                 <h1 class="masthead-heading mb-0">Muito Rock</h1>
@@ -60,7 +60,7 @@
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/django-king.gif'%}" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/pat-moonless.gif'%}" alt="..." /></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">

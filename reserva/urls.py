@@ -7,10 +7,8 @@ urlpatterns = [
     path('inicio/', DashboardView.as_view(), name = 'inicio'),
     
     #CRUD SOLICITÇÔES
-    path('criar-solicitacao/', SolicitacaoCreate.as_view(), name = 'criar-solicitacao'),
-    path('editar-solicitacao/<int:pk>/', SolicitacaoUpdate.as_view(), name = 'editar-solicitacao'),
-    path('excluir-solicitacao/<int:pk>/', SolicitacaoDelete.as_view(), name = 'excluir-solicitacao'),
     path('listar-solicitacao', SolicitacaoList.as_view(), name = 'listar-solicitacao'),
+    path('detalhar-solicitacao/<int:pk>/', SolicitacaoDetail.as_view(), name = 'detalhar-solicitacao'),
 
     #AUTENTICAÇÂO
     path('login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'login'),
@@ -28,11 +26,7 @@ urlpatterns = [
     path('js/excluir/<int:pk>/', solicitacao_delete, name='js-excluir'),
     path('js/editar-status/<int:pk>/', status_update, name='js-editar-status'),
 
-    #ADMIN
-    path('status-solicitacao/<int:pk>', StatusUpdate.as_view(), name = 'status-solicitacao'),
-
     path('perfil/', ProfileEdit.as_view() , name = 'perfil'),
-    # path('password/', auth_views.PasswordChangeView.as_view(template_name = 'change-password.html'), name = 'mudar-senha'),
     path('password/', PasswordEdit.as_view(template_name = 'change-password.html'), name = 'mudar-senha'),
     
 ]
