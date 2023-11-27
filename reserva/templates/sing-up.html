@@ -1,0 +1,68 @@
+{% extends 'modelo.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>Criar conta</title>
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block destaque %}
+{% endblock %}
+
+{% block conteudo %}
+<div class="container fluid">
+    <div class="container">
+
+        <div class="col-12">
+            <div class="pt-5 mb-2 ms-4"><a  href="{% url 'index' %}"><i class="fa-solid fa-angles-left"></i> INICIO</a></div>
+
+        <div id="loginContainer" class="d-flex justify-content-center mt-0">
+
+                <div class="col-sm-12 col-lg-10 ">
+                    <div class="wrap d-md-flex">
+            
+                        <img src="{% static 'img/cirilo.gif' %}" class="hidden-mobile">
+            
+                        <div class="login-wrap p-4 p-md-5">
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Criar Conta</h3>
+                                </div>
+            
+                                <div class="w-100">
+                                        <p class="social-media d-flex justify-content-end position-relative">
+                                            <a href="https://i.pinimg.com/originals/14/8d/1c/148d1ce4b0fdf5218a5ec53595487ca0.gif" target="_blank" class="social-icon d-flex align-items-center justify-content-center"><i class="fa-brands fa-facebook"></i></a>
+                                            <a href="https://media.tenor.com/UKKPyTd7AS0AAAAC/manoel-gomes.gif" target="_blank" class="social-icon d-flex align-items-center justify-content-center"><i class="fa-brands fa-twitter"></i></i></a>
+                                        </p>
+                                </div>
+                            </div>
+                            
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                {{ profile_form|crispy }}
+            
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-secondary rounded submit px-3">CRIAR</button>
+                                </div>
+                            
+                            </form>
+            
+                            <p class="text-center pt-1">Já possui uma conta? <a data-toggle="tab" href="{% url 'logout' %}">Entre agora!</a></p>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block rodape %}
+{% endblock %}

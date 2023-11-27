@@ -1,0 +1,69 @@
+
+  <!-- Modal -->
+  <div class="modal fade" id="detailModal{{solicitacao.id}}" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true" data-bs-theme="dark">
+    <div class="modal-dialog modal-dialog-centered">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="detailModalLabel">Solicitação de {{solicitacao.profile}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Solicitado por </h6>
+                </div>
+                <div class="col-md-8">
+                  <p>{{solicitacao.profile}}</p>    
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                  <h6>Justificativa </h6>
+              </div>
+              <div class="col-md-8">
+                <p>{{solicitacao.justificativa}}</p>    
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                  <h6>Data </h6>
+              </div>
+              <div class="col-md-8">
+                <p>{{solicitacao.data}}</p>    
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                  <h6>Hora de Entrada </h6>
+              </div>
+              <div class="col-md-8">
+                <p>{{solicitacao.entry_hour}}</p>    
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4">
+                  <h6>Hora de Saída </h6>
+              </div>
+              <div class="col-md-8">
+                <p>{{solicitacao.exit_hour}}</p>    
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>

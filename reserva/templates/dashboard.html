@@ -1,0 +1,136 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Página Inicial</title>
+{% endblock %}
+    
+{% block conteudo %}
+<div  class="container-fluid">
+    <div id="mainContainer" class="container">
+        <h1>
+            Página Inicial</h1>  
+        
+        <hr>
+        
+        <!-- CARROSEL -->
+        <div>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    
+                {% for post in posts %}
+                  <div class="carousel-item active">
+                    <div class="card">
+                        <img src="{{post.image.url}}" class="d-block w-100 img-wrapper" alt="image-post">
+                        <div class="card-body">
+                            <h5 class="card-title">{{post.title}}</h5>
+                            <p class="card-text">Postado por {{ post.author }} em {{ post.post }} </p>
+                            <a href="{% url 'post' post.pk %}" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                    </div>
+                  </div>
+                {%endfor%}
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+        
+        <hr>
+
+        <h2>Horários Reservados - Sala E04</h2>
+        <div id="calendarRow" class="row d-flex py-2 ">
+            <div class="col-md-9 mx-auto">
+                <div id='calendar' class="rounded-top-4 "></div> 
+                </div>
+        </div>
+        
+    </div> 
+    
+    {% for solicitacao in solicitacaos %}
+        {% include 'solicitacao/detail.html' %}
+    {%endfor%}
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt-br',
+            buttonText: {today: 'Hoje'},
+            dayMaxEventRows: true, // for all non-TimeGrid views
+            views: {
+                timeGrid: {
+                    dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+                }
+            },
+            events: [
+                // {% for solicitacao in solicitacaos %}
+                // {% if solicitacao.status.id == 3 %}
+                {
+                    title: '{{ solicitacao.profile }}',
+                    start: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.entry_hour}}',
+                    id: '{{solicitacao.id}}',
+                    borderColor: 'blue'
+                }, 
+    
+                // {% elif solicitacao.status.id == 1 %}
+                {
+                    title: '{{ solicitacao.profile }}',
+                    start: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.entry_hour}}',
+                    id: '{{solicitacao.id}}',
+                    borderColor: 'yellow'
+                }, 
+                // {% elif solicitacao.status.id == 2 %}
+                // {%endif%}
+                // {% endfor %}
+            ],
+            eventDidMount: function(info) {
+                var eventElement = info.el;
+                var solicitacaoId = info.event.id; // Acesse o ID da solicitação usando info.event.id
+                eventElement.setAttribute('data-bs-toggle', 'modal');
+                eventElement.setAttribute('data-bs-target', '#detailModal' + solicitacaoId);
+                eventElement.setAttribute('type', 'button');
+            },
+    
+        });
+        calendar.render();
+    });
+</script>
+
+<script>
+var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+var cardWidth = $(".carousel-item").width();
+
+var scrollPosition = 0;
+
+$(".carousel-control-next").on("click", function () {
+  if (scrollPosition < (carouselWidth - cardWidth * 4)) { //check if you can go any further
+    scrollPosition += cardWidth;  //update scroll position
+    $(".carousel-inner").animate({ scrollLeft: scrollPosition },600); //scroll left
+  }
+});
+
+$(".carousel-control-prev").on("click", function () {
+  if (scrollPosition > 0) {
+    scrollPosition -= cardWidth;
+    $(".carousel-inner").animate(
+      { scrollLeft: scrollPosition },
+      600
+    );
+  }
+});
+</script>
+
+{% endblock %}

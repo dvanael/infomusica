@@ -1,0 +1,93 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Página Inicial</title>
+{% endblock %}
+    
+{% block menu %} {%endblock%}
+
+{% block conteudo %}
+<!-- indexContainer -->
+<div id="page-top" class="container-fluid">
+    <nav id="indexNavbar" class="navbar navbar-expand-lg fixed-top">
+        <div class="container px-5">
+            <a class="navbar-brand" href="{% url 'inicio' %}"><h1 id="navbarLogo" class="fs-5">
+                <span class="bg-white rounded shadow px-2 me-2"><i class="fa-solid fa-guitar text-dark"></i></span>
+                iNFO MúSiCA</h1></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-solid fa-bars text-white"></i></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'registrar' %}">Cadastre-se</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'logout' %}">Entrar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    
+    <header id="titleIndex" class="masthead text-center" style="background-image: url({% static 'img/bg-index.png'%})">
+        <div class="masthead-content">
+            <div class="container px-5">
+                <h1 class="masthead-heading mb-0">Muito Rock</h1>
+                <h3 class="masthead-subheading mb-0">E o projeto? Nada ainda?</h3>
+                <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">SAIBA MAIS</a>
+            </div>
+        </div>
+    </header>
+
+
+    <div id="indexSection">
+    <!-- Content section 1-->
+    <section id="scroll">
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/cirilo.gif'%}" alt="..." /></div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h2 class="display-4">For those about to rock...</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content section 2-->
+    <section>
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/pat-moonless.gif'%}" alt="..." /></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <h2 class="display-4">We salute you!</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content section 3-->
+    <section>
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/joel.gif'%}" alt="..." /></div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h2 class="display-4">Let there be rock!</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Página Inicial</title>
+{% endblock %}
+    
+{% block conteudo %}
+<div  class="container-fluid">
+    <div id="mainContainer" class="container">
+        <div class="mx-5 text-start ">
+            <h1>{{ post.title }}</h1>
+            <p class="lead fs-6">Postado por {{ post.author }} em {{ post.post }}</p>
+
+            <p class="my-3">{{post.text|safe}}</p>
+            <img src="{{post.image.url}}" alt="" width="800px">
+        </div>
+    </div> 
+</div>
+{% endblock %}

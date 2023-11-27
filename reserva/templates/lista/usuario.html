@@ -1,0 +1,110 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Solicitações</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container-fluid">
+    <div id="mainContainer" class="container">
+        <h1>Lista de Usuários</h1>
+
+        <hr>
+
+        <!-- ADM TABLE -->
+        <div class="table-responsive">
+            <table class="table table-striped table-dark table-hover table-borderless">
+                <tr>
+                    <th>Nome</th>
+                    <th>Matricula</th>
+                    <th>Email</th>
+                    <th>Opções</th>
+                </tr>
+
+                {% for el in object_list %}
+
+                <tr>
+                    <td>{{ el.user }}</td>
+                    <td>{{ el.matricula }}</td>
+                    <td>{{ el.user.email }}</td>
+                    <td>
+                        <div class="d-flex">
+                        <a 
+                            href="{% url 'editar-usuario' el.pk %}" 
+                            class="btn btn-secondary btn-sm mx-auto" 
+                            title="Editar"> Editar</a>
+
+                        <button type="button" class="btn btn-danger btn-sm mx-auto" data-bs-toggle="modal" data-bs-target="#deleteModal{{el.id}}">
+                            Excluir
+                        </button>
+                        
+                        </div>
+                    </td>
+                </tr>
+                
+                <form action="{% url 'excluir-usuario' el.pk %}" method="post">
+                    {% include 'form-excluir.html' %}
+                </form>
+                
+                {% empty %}
+                <tr>
+                    <td colspan="3"> Não há Solicitações.</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- PAGINAÇÃO -->
+        <nav aria-label="Page navigation example" class="my-3">
+            <ul class="pagination justify-content-center">
+
+            <!-- PRIMEIRA -->
+                {% if page_obj.number != 1 %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                {%else%}
+
+                {%endif%}
+                </li>
+            
+            <!-- PÁGINA ANTERIOR -->
+                {% if page_obj.has_previous %}  
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
+                {%else%}
+                <li class="page-item disabled">
+                    <a class="page-link text-white-50 bg-dark" href="#">ANTERIOR</a>
+                {%endif%}
+                </li>
+
+            <!-- PÁGINA ATUAL -->
+            <li class="page-item disabled">
+                <div class="page-link current text-white bg-dark">
+                    PÁGINA {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</div></li>
+
+            <!-- PROXIMA PAGINA -->
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.next_page_number }}">PRÓXIMA</a>
+                {%else%}
+                <li class="page-item disabled">
+                    <a class="page-link text-white-50 bg-dark" href="#">PRÓXIMA</a>
+                {%endif%}
+                </li>
+
+                <!-- ULTIMA -->
+                {% if page_obj.number != page_obj.paginator.num_pages %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                {%else%}
+
+                {%endif%}
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</div>
+
+{% endblock %}

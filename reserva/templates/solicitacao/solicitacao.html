@@ -1,0 +1,213 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Solicitações</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container-fluid">
+<div id="mainContainer" class="container">
+    <h1>Lista de Solicitações</h1>
+    
+    <hr>
+
+    <div class="row d-flex align-items-center">
+		<div class="col-md-9 col-sm-7 my-1 me-auto text-start">
+
+            <!-- Filtro de Data -->
+            <div class="d-flex align-items-center">
+            <span for="dataSelect" class="text-start">Filtro de Data</span>
+
+                <select id="dataSelect" class="form-select mx-2" onchange="window.location.href=this.value;" >
+
+                    <option value="?filtro_data=todas" {% if 'todas' in request.GET.filtro_data|default:'' %}selected{% endif %}>
+                        Todas</option>
+                    <option value="?filtro_data=ultima_semana" {% if 'ultima_semana' in request.GET.filtro_data %}selected{% endif %}>
+                        Última semana</option>
+                    <option value="?filtro_data=ultimo_mes" {% if 'ultimo_mes' in request.GET.filtro_data %}selected{% endif %}>
+                        Último mês</option>
+                    <option value="?filtro_data=prox_semana" {% if 'prox_semana' in request.GET.filtro_data %}selected{% endif %}>
+                        Próxima semana</option>
+                    <option value="?filtro_data=prox_mes" {% if 'prox_mes' in request.GET.filtro_data %}selected{% endif %}>
+                        Próximo mês</option>
+                </select>
+            </div>
+                
+		</div>
+		<div class="col-md-3 col-sm-5 my-1 ms-auto">
+
+            <button type="button" class="btn btn-secondary js-create" data-url="{% url 'js-criar' %}">
+                NOVA SOLICITAÇÃO</button>
+            <div class="modal fade" id="modal-evento">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        
+                    </div>
+                </div>
+            </div>
+
+		</div>
+	</div>
+
+
+    <hr>
+
+    <div class="table-responsive">
+        <table id="table-evento" class="table table-striped table-dark table-hover table-border align-middle">
+            
+    {% for group in request.user.groups.all %}
+    {% if group.name == 'Admin' %}
+            <thead>
+                <th>Usuario</th>
+                <th>Matricula</th>
+                <th>Status</th>
+                <th>Justificativa</th>
+                <th>Justificativa Status</th>
+                <th>Data</th>
+                <th>Entrada</th>
+                <th>Saída</th>
+                <th>Postado em</th>
+                <th>Opções</th>
+            </thead>
+
+            <tbody>
+                {%  include 'solicitacao/adm-list.html'  %}
+            </tbody>
+    {%else%}
+            <thead>
+                <th>Status</th>
+                <th>Justificativa</th>
+                <th>Data</th>
+                <th>Entrada</th>
+                <th>Saída</th>
+                <th>Opções</th>
+            </thead>
+
+            <tbody>
+                {% include 'solicitacao/list.html' %}
+            </tbody>
+            
+    {%endif%}
+    {%endfor%}
+            
+        </table>
+    </div>
+
+    <!-- PAGINAÇÃO -->
+        <nav aria-label="Page navigation example" class="my-3">
+            <ul class="pagination justify-content-center">
+
+            <!-- PRIMEIRA -->
+                {% if page_obj.number != 1 %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                {%else%}
+
+                {%endif%}
+                </li>
+            
+            <!-- PÁGINA ANTERIOR -->
+                {% if page_obj.has_previous %}  
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
+                {%else%}
+                <li class="page-item disabled">
+                    <a class="page-link text-white-50 bg-dark" href="">ANTERIOR</a>
+                {%endif%}
+                </li>
+
+            <!-- PÁGINA ATUAL -->
+            <li class="page-item disabled">
+                <div class="page-link current text-white bg-dark">
+                    PÁGINA {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</div></li>
+
+            <!-- PROXIMA PAGINA -->
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.next_page_number }}">PRÓXIMA</a>
+                {%else%}
+                <li class="page-item disabled">
+                    <a class="page-link text-white-50 bg-dark" href="#">PRÓXIMA</a>
+                {%endif%}
+                </li>
+
+                <!-- ULTIMA -->
+                {% if page_obj.number != page_obj.paginator.num_pages %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                {%else%}
+
+                {%endif%}
+                </li>
+            </ul>
+        </nav>
+
+        <hr>
+    <!-- CALENDARIO -->
+        <h2>Horários Reservados - Sala E04</h2>
+        <div id="calendarRow" class="row d-flex py-2 ">
+            <div class="col-md-9 mx-auto">
+                <div id='calendar' class="rounded-top-4 "></div> 
+                </div>
+        </div>
+    <!-- MODAL CALENDARIO -->
+        {% for solicitacao in object_list %}
+            {% include 'solicitacao/detail.html' %}
+        {%endfor%}
+</div>   
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/solicitacao.js' %}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'pt-br',
+        buttonText: {today: 'Hoje'},
+        dayMaxEventRows: true, // for all non-TimeGrid views
+        views: {
+            timeGrid: {
+                dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+            }
+        },
+        events: [
+            // {% for solicitacao in object_list %}
+            // {% if solicitacao.status.id == 3 %}
+            {
+                title: '{{ solicitacao.profile }}',
+                start: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.entry_hour}}',
+                id: '{{solicitacao.id}}',
+                borderColor: 'blue'
+            }, 
+
+            // {% elif solicitacao.status.id == 1 %}
+            {
+                title: '{{ solicitacao.profile }}',
+                start: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.entry_hour}}',
+                id: '{{solicitacao.id}}',
+                borderColor: 'yellow'
+            }, 
+            // {% elif solicitacao.status.id == 2 %}
+            // {%endif%}
+            // {% endfor %}
+        ],
+        eventDidMount: function(info) {
+            var eventElement = info.el;
+            var solicitacaoId = info.event.id; // Acesse o ID da solicitação usando info.event.id
+            eventElement.setAttribute('data-bs-toggle', 'modal');
+            eventElement.setAttribute('data-bs-target', '#detailModal' + solicitacaoId);
+            eventElement.setAttribute('type', 'button');
+        },
+
+    });
+    calendar.render();
+});
+
+
+</script>
+{% endblock %}

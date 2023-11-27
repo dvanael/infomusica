@@ -1,0 +1,18 @@
+
+<form method="post" action="{% url 'js-excluir' solicitacao.pk %}" class="js-delete-form" id="modalSolicitacao" data-bs-theme="dark">
+    {% csrf_token %}
+
+    <div class="modal-header">
+        <h4 class="modal-title">EXCLUIR SOLICITAÇÃO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        <p>Tem certeza que deseja excluir essa solicitação <strong style="color: rgb(233, 99, 99);">{{solicitacao}}</strong>?</p>
+    </div>        
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+    </div>
+</form>

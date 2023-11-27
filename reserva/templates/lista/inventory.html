@@ -1,0 +1,125 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Inventário</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container-fluid">
+    <div id="mainContainer" class="container">
+        <h1>Inventário</h1>
+
+        <hr>
+
+            {% for item in object_list %}
+
+            <div class="row border border-rounded rounded-4 px-md-3 mx-2 my-4">
+                <div class="col-md-6 d-flex justify-content-center">
+                    
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}"  width="500px" height="500px">
+                    
+                    {%else%}
+                    <img src="{% static 'img/placeholder-img.png' %}" alt="Sem imagem" width="500px" height="300px"> 
+                    {%endif%}
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12 pt-3">
+                        <h2>{{ item.name }}</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Descrição</h6>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{item.description}}
+                            </p>
+                                </div>
+                    </div>
+                    
+                    <div class="row">
+                    {% if item.sound %}
+                    <div class="col-md-4">
+                        <h6>Amostra de Áudio</h6>
+                    </div>
+                    <div class="col-md-8">
+                        <audio controls muted >
+                            <source src="{{ item.sound.url }}" type="audio/mpeg">
+                        </audio>
+                    </div>
+                    {%else%}
+                        <div class="col-md-12">
+                            <h6 class="text-white-50">Sem amostra de áudio.</h6>
+                        </div>
+                    {%endif%}
+                    </div>
+                </div>
+                
+            </div>
+
+            {% empty %}
+
+            {% endfor %}
+
+
+        <!-- PAGINAÇÃO -->
+        <nav aria-label="Page navigation example" class="my-3">
+            <ul class="pagination justify-content-center">
+
+            <!-- PRIMEIRA -->
+                {% if page_obj.number != 1 %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                {%else%}
+
+                {%endif%}
+                </li>
+            
+            <!-- PÁGINA ANTERIOR -->
+                {% if page_obj.has_previous %}  
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
+                {%else%}
+                <li class="page-item disabled">
+                    <a class="page-link text-white-50 bg-dark" href="#">ANTERIOR</a>
+                {%endif%}
+                </li>
+
+            <!-- PÁGINA ATUAL -->
+            <li class="page-item disabled">
+                <div class="page-link current text-white bg-dark">
+                    PÁGINA {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</div></li>
+
+            <!-- PROXIMA PAGINA -->
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.next_page_number }}">PRÓXIMA</a>
+                {%else%}
+                <li class="page-item disabled">
+                    <a class="page-link text-white-50 bg-dark" href="#">PRÓXIMA</a>
+                {%endif%}
+                </li>
+
+                <!-- ULTIMA -->
+                {% if page_obj.number != page_obj.paginator.num_pages %}
+                <li class="page-item">
+                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                {%else%}
+
+                {%endif%}
+                </li>
+            </ul>
+        </nav>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/evento.js' %}"></script>
+{% endblock %}
