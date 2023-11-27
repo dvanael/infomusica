@@ -1,0 +1,7 @@
+django
+django-crispy-forms
+django-braces
+django-cleanup
+django-bootstrap5
+crispy-bootstrap5
+fontawesomefree==6.4.2
