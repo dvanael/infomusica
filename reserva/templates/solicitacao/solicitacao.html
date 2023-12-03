@@ -152,7 +152,7 @@
                 </div>
         </div>
     <!-- MODAL CALENDARIO -->
-        {% for solicitacao in object_list %}
+        {% for solicitacao in solicitacaos %}
             {% include 'solicitacao/detail.html' %}
         {%endfor%}
 </div>   
@@ -176,13 +176,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         events: [
-            // {% for solicitacao in object_list %}
+            // {% for solicitacao in solicitacaos %}
             // {% if solicitacao.status.id == 3 %}
             {
                 title: '{{ solicitacao.profile }}',
                 start: '{{ solicitacao.data | date:"Y-m-d" }}T{{solicitacao.entry_hour}}',
                 id: '{{solicitacao.id}}',
-                borderColor: 'blue'
+                borderColor: 'green'
             }, 
 
             // {% elif solicitacao.status.id == 1 %}
