@@ -387,6 +387,9 @@ footer p.lead{
 .green {
     color: #48E15D;
 }
+.yellow {
+    color: #FDED5D;
+}
 
 
 @media screen and (max-width: 768px){
