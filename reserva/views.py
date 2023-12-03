@@ -181,6 +181,11 @@ class SolicitacaoList(GroupRequiredMixin, ListView):
             queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=30)])
         
         return queryset
+        
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['solicitacaos'] = Solicitacao.objects.all()
+        return context
     
 class SolicitacaoDetail(GroupRequiredMixin, ListView):
     group_required = [u'Aluno', u'Admin']
