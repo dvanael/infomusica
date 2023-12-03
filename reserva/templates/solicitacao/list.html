@@ -3,12 +3,12 @@
 <tr>
     <td>
         <div class="d-flex  ">
-    {% if solicitacao.status.id == 1 %}
-        <i class="fa-regular fa-circle fa-xl ms-3"></i>  
+     {% if solicitacao.status.id == 1 %}
+        <i class="fa-solid fa-circle-exclamation yellow fa-xl mx-auto"></i>  
     {% elif solicitacao.status.id == 2 %}
-        <i class="fa-regular fa-circle-xmark fa-xl red ms-3"></i>  
+        <i class="fa-solid fa-circle-xmark fa-xl red mx-auto"></i>  
     {% elif solicitacao.status.id == 3 %}
-        <i class="fa-regular fa-circle-check fa-xl green ms-3"></i>  
+        <i class="fa-solid fa-circle-check fa-xl green mx-auto"></i>  
     {%endif%}
         </div>
     <!-- {{ solicitacao.status }} -->
