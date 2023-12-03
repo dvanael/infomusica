@@ -24,30 +24,18 @@ from .models import *
 class IndexView(TemplateView):
     template_name = 'index.html'
 
-
-def dashboard_view(request):
-    if request.method=='GET':
-        solicitacao = Solicitacao.objects.all()
-        post = Post.objects.all().order_by('-post')
-        inventory = Item.objects.all()
-
-    context = {
-        'solicitacaos': solicitacao,
-        'posts': post,
-        'items': inventory,
-    } 
-
-    return render(request,'dashboard.html', context)
-
 class DashboardView(GroupRequiredMixin, ListView):
     group_required = [u'Aluno',u'Admin']
     login_url = reverse_lazy('login')
     model = Solicitacao
     template_name = 'dashboard.html' 
 
-    def get_queryset(self):
-        queryset = self.model.objects.filter(status = 3)
-        return queryset    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['solicitacaos'] = Solicitacao.objects.all()
+        context['posts'] = Post.objects.all().order_by('-post')
+        context['items'] = Item.objects.last()
+        return context
 
 # -- SOLICITACAO CRUD --
 # -- FUNCTION BASED VIEWS -- 
