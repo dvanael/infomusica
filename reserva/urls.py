@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('', IndexView.as_view(), name = 'index'),
-    path('inicio/', dashboard_view, name = 'inicio'),
+    path('inicio/', DashboardView.as_view(), name = 'inicio'),
     
     #CRUD SOLICITÇÔES
     path('listar-solicitacao', SolicitacaoList.as_view(), name = 'listar-solicitacao'),
