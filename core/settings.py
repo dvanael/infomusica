@@ -26,61 +26,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'reserva.apps.ReservaConfig',
+    
     'crispy_forms',
     'crispy_bootstrap5',
     'fontawesomefree',
-    'django_summernote',
+    'ckeditor',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
-SUMMERNOTE_CONFIG = {
-    'iframe': True,
-    'summernote': {
-        'airMode': False,
-        'width': '100%',
-        'height': '580',
-
-        # Use proper language setting automatically (default)
-        'lang': 'pt-BR',
-
-        # Toolbar customization
-        # https://summernote.org/deep-dive/#custom-toolbar-popover
-        'toolbar': [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['fontname', ['fontname']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']],
-        ],
-
-        # Or, explicitly set language/locale for editor
-
-        # You can also add custom settings for external plugins
-        'print': {
-            'stylesheetUrl': '/some_static_folder/printable.css',
-        },
-        'codemirror': {
-            'mode': 'htmlmixed',
-            'lineNumbers': 'true',
-            # You have to include theme file in 'css' or 'css_for_inplace' before using it.
-            'theme': 'monkai',
-        },
-        'css': (
-        '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/theme/monokai.min.css',
-    ),
-        
-    },
-
-}
-
-SUMMERNOTE_THEME = 'bs4' 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
