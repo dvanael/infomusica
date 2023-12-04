@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import date
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 # TABELA STATUS
@@ -46,7 +47,7 @@ class Item(models.Model):
 # TABELA POST
 class Post(models.Model):
     title = models.CharField(default='', max_length=150, verbose_name='Título')
-    text = models.TextField(default='', verbose_name='Texto')
+    content = RichTextField(default='', verbose_name='Conteúdo')
     image = models.ImageField(null=False, blank=False, verbose_name='Imagem')
     author = models.ForeignKey(Perfil, on_delete=models.CASCADE,  verbose_name='Autor')
     post = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name='Post')
