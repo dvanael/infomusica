@@ -2,9 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from .models import *
-
         
 # USUARIO FORM
 class UsuarioForm(UserCreationForm):
@@ -82,8 +80,4 @@ class StatusForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','image', 'text')
-        widgets = {
-            'text': SummernoteWidget(),
-            # 'bar': SummernoteInplaceWidget(),
-        }
+        fields = ('title','image', 'content')
