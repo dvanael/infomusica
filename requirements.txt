@@ -5,3 +5,5 @@ django-cleanup
 django-bootstrap5
 crispy-bootstrap5
 fontawesomefree==6.4.2
+Pillow
+django-ckeditor
