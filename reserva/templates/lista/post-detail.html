@@ -12,7 +12,7 @@
             <h1>{{ post.title }}</h1>
             <p class="lead fs-6">Postado por {{ post.author }} em {{ post.post }}</p>
 
-            <p class="my-3">{{post.text|safe}}</p>
+            <p class="my-3">{{post.content|safe}}</p>
             <img src="{{post.image.url}}" alt="" width="800px">
         </div>
     </div> 
