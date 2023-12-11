@@ -1,0 +1,98 @@
+{% extends 'modelo.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>Login</title>
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block destaque %}
+{% endblock %}
+
+{% block conteudo %}
+<div class="container fluid ">
+    <div class="container">
+
+        <div id="loginContainer" class="d-flex justify-content-center mt-5 ">
+            {% if request.user.is_authenticated %}
+            
+            <div class="col-sm-10 col-md-5">
+                <h3>Ação não permitida!</h3>
+                <hr>
+                <p class="lead">
+                    <b>Houve algum problema para processar a ação desejada ou você não tem permissão.</b></p>
+                <a href="{% url 'index' %}" class="btn btn-secondary"> VOLTAR AO INICIO</a>
+            </div>
+            
+
+            {% else %}
+           
+
+                <div class="col-sm-12 col-lg-10">
+                    <div class="wrap d-md-flex">
+            
+                        <img src="{% static 'img/cirilo.gif' %}" class="hidden-mobile">
+            
+                        <div class="login-wrap p-4 p-md-5">
+                            <div class="d-flex">
+                                <div class="mb-3 mx-auto fs-5"><a  href="{% url 'index' %}"><h2 class="fs-2 m-0">INFOMUSICA</h2></a></div>
+                            </div>
+
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Login</h3>
+                                </div>
+            
+                                <div class="w-100">
+                                        <p class="social-media d-flex justify-content-end position-relative">
+                                            <a href="https://i.pinimg.com/originals/14/8d/1c/148d1ce4b0fdf5218a5ec53595487ca0.gif" target="_blank" class="social-icon d-flex align-items-center justify-content-center"><i class="fa-brands fa-facebook"></i></a>
+                                            <a href="https://media.tenor.com/UKKPyTd7AS0AAAAC/manoel-gomes.gif" target="_blank" class="social-icon d-flex align-items-center justify-content-center"><i class="fa-brands fa-twitter"></i></i></a>
+                                        </p>
+                                </div>
+                            </div>
+                            
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+            
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-success rounded submit px-3">ENTRAR</button>
+                                </div>
+                            <div id="loginLink">
+                                <div class="form-group d-sm-flex">
+                                    <!-- <div class="w-50 p-1 text-start">
+                                        <input for="loginCheck" type="checkbox" class="form-check-input" checked>
+                                        <label id="loginCheck" class="checkbox-wrap mb-0">Manter logado
+                                        </label>
+                                    </div> -->
+                
+                                    <div class="p-1 mx-auto">
+                                        <a href="{% url 'reset_password' %}">Esqueceu sua senha?</a>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+            
+                            <p class="text-center pt-4">Não possui uma conta? <a data-toggle="tab" href="{% url 'registrar' %}">Crie uma conta</a></p>
+                        </div>
+                    </div>
+            
+                </div>
+        </div>
+
+    
+            {% endif %}
+            
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block rodape %}
+{% endblock %}
