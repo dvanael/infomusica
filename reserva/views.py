@@ -20,6 +20,9 @@ from django.template.loader import render_to_string
 from .forms import UsuarioForm, PerfilForm, ProfileEditForm, SolicitacaoForm, StatusForm, PostForm
 from .models import *
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 # -- INDEX --
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -28,7 +31,7 @@ class DashboardView(GroupRequiredMixin, ListView):
     group_required = [u'Aluno',u'Admin']
     login_url = reverse_lazy('login')
     model = Solicitacao
-    template_name = 'dashboard.html' 
+    template_name = 'dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -156,7 +159,6 @@ class SolicitacaoList(GroupRequiredMixin, ListView):
     model = Solicitacao
     template_name = 'solicitacao/solicitacao.html'
     content_object_name = 'object_list'
-
     paginate_by = 7
         
     def get_queryset(self):
@@ -181,7 +183,7 @@ class SolicitacaoList(GroupRequiredMixin, ListView):
             queryset = queryset.filter(data__range=[timezone.now(), timezone.now()+ timezone.timedelta(days=30)])
         
         return queryset
-        
+    
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['solicitacaos'] = Solicitacao.objects.all()
@@ -359,6 +361,19 @@ def register(request):
             user = authenticate(username=username, password=password)
             login(request, user)
 
+            # send_mail('Subject here', 'Here is the message.', settings.EMAIL_HOST_USER, [user.email], fail_silently= False)            
+
+            my_recipient =  form.cleaned_data['email']
+
+            send_mail(
+                subject= 'MIM DE',
+                message= 'POGGERS',
+                recipient_list= [my_recipient],
+                from_email= None,
+                fail_silently= False
+
+            )
+
             return redirect('inicio')
         
     else:
@@ -366,7 +381,7 @@ def register(request):
         profile_form = PerfilForm()
 
     context = {'form': form, 'profile_form': profile_form} 
-    return render(request, 'sing-up.html',  context)
+    return render(request, 'registration/sing-up.html',  context)
 
 # UPDATE
 class UsuarioUpdate(GroupRequiredMixin, UpdateView):

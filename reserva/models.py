@@ -4,6 +4,7 @@ from django.utils import timezone
 from datetime import date
 from ckeditor.fields import RichTextField
 
+
 # Create your models here.
 # TABELA STATUS
 class Status(models.Model):
@@ -24,7 +25,7 @@ class Perfil(models.Model):
 class Solicitacao(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE,verbose_name='Status', related_name='status', to_field='id', default='1')
     profile = models.ForeignKey(Perfil, on_delete=models.CASCADE, verbose_name='Perfil')
-    justificativa = models.CharField(default='', max_length=250, verbose_name='Justificativa')
+    justificativa = models.TextField(default='', max_length=250, verbose_name='Justificativa')
     justify_status = models.CharField(default='Ainda não justificado.', max_length=250, verbose_name='Justificativa Status')
     data = models.DateField(default=date.today, verbose_name='Data')
     entry_hour = models.TimeField(default=timezone.now, verbose_name='Hora de Entrada')
@@ -37,7 +38,7 @@ class Solicitacao(models.Model):
 # TABELA ITEM
 class Item(models.Model):
     name = models.CharField(default='', max_length=100, verbose_name='Nome')
-    description = models.TextField(default='', max_length=250, verbose_name='Descrição')
+    description = models.TextField(default='', max_length=550, verbose_name='Descrição')
     image = models.ImageField(null=True, blank=True, upload_to='images/', verbose_name='Imagem')
     sound = models.FileField(null=True, blank=True, upload_to='documents/', verbose_name='Amostra de Áudio')
 
@@ -47,6 +48,7 @@ class Item(models.Model):
 # TABELA POST
 class Post(models.Model):
     title = models.CharField(default='', max_length=150, verbose_name='Título')
+    # text = models.TextField(default='', verbose_name='Texto')
     content = RichTextField(default='', verbose_name='Conteúdo')
     image = models.ImageField(null=False, blank=False, verbose_name='Imagem')
     author = models.ForeignKey(Perfil, on_delete=models.CASCADE,  verbose_name='Autor')

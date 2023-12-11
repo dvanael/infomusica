@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from .models import *
+
         
 # USUARIO FORM
 class UsuarioForm(UserCreationForm):
@@ -81,3 +82,4 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title','image', 'content')
+        

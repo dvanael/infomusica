@@ -17,11 +17,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Solicitacao)
 admin.site.register(Status)
 admin.site.register(Item)
-
-from django_summernote.admin import SummernoteModelAdmin
-
-# Apply summernote to all TextField in model.
-class AdminPost(SummernoteModelAdmin):  # instead of ModelAdmin
-    summernote_fields = ('text')
-
-admin.site.register(Post, AdminPost)
+admin.site.register(Post)
