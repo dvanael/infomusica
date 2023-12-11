@@ -134,3 +134,11 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'inicio'
 
 LOGOUT_REDIRECT_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'INFOMUSICA'
+EMAIL_HOST_USER = os.environ.get('AA_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('AA_EMAIL_HOST_PASSWORD')
