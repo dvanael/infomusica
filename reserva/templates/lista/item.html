@@ -39,7 +39,7 @@
                 {% for el in object_list %}
 
                 <tr>
-                    <td>{{ el.name }}</td>
+                    <td ><div class="ms-2">{{ el.name }}</div></td>
                     <td>{{ el.description }}</td>
                 {% if el.image %}
                     <td><img src="{{ el.image.url }}" alt="{{ el.name }}" width="50px" height="50px">
@@ -53,13 +53,13 @@
                 {%else%}
                     <td>Não</td>
                 {%endif%}
-                    <td>
+                    <td >
                         <a 
                             href="{% url 'editar-item' el.pk %}" 
-                            class="btn btn-secondary btn-sm mx-auto" 
+                            class="btn btn-secondary btn-sm m-1" 
                             title="Editar"> Editar</a>
                 
-                        <button type="button" class="btn btn-danger btn-sm mx-auto" data-bs-toggle="modal" data-bs-target="#deleteModal{{el.id}}">
+                        <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{el.id}}">
                             Excluir
                         </button>
                         
@@ -79,53 +79,7 @@
         </div>
 
         <!-- PAGINAÇÃO -->
-        <nav aria-label="Page navigation example" class="my-3">
-            <ul class="pagination justify-content-center">
-
-            <!-- PRIMEIRA -->
-                {% if page_obj.number != 1 %}
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
-                {%else%}
-
-                {%endif%}
-                </li>
-            
-            <!-- PÁGINA ANTERIOR -->
-                {% if page_obj.has_previous %}  
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
-                {%else%}
-                <li class="page-item disabled">
-                    <a class="page-link text-white-50 bg-dark" href="#">ANTERIOR</a>
-                {%endif%}
-                </li>
-
-            <!-- PÁGINA ATUAL -->
-            <li class="page-item disabled">
-                <div class="page-link current text-white bg-dark">
-                    PÁGINA {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</div></li>
-
-            <!-- PROXIMA PAGINA -->
-                {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.next_page_number }}">PRÓXIMA</a>
-                {%else%}
-                <li class="page-item disabled">
-                    <a class="page-link text-white-50 bg-dark" href="#">PRÓXIMA</a>
-                {%endif%}
-                </li>
-
-                <!-- ULTIMA -->
-                {% if page_obj.number != page_obj.paginator.num_pages %}
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
-                {%else%}
-
-                {%endif%}
-                </li>
-            </ul>
-        </nav>
+        {% include 'lista/pagination.html' %}
         
     </div>
 </div>

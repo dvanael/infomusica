@@ -48,26 +48,38 @@
 
                 {% elif group.name == 'Admin' %}
                 
+                <hr>
+
+                <li class="sidebar-header">
+                    Administração 
+                </li>
+
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
-                        aria-expanded="false" aria-controls="pages">
-                        <i class="fa-regular fa-file-lines pe-2"></i>
-                        Gerenciar
+                    <a href="{% url 'listar-solicitacao' %}" class="sidebar-link">
+                        <i class="fa-solid fa-user pe-2"></i>
+                        Solicitações
                     </a>
-                    <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item ms-5">
-                            <a href="{% url 'listar-solicitacao' %}" class="sidebar-link">Solicitações</a>
-                        </li>
-                        <li class="sidebar-item ms-5">
-                            <a href="{% url 'listar-usuario' %}" class="sidebar-link">Usuários</a>
-                        </li>
-                        <li class="sidebar-item ms-5">
-                            <a href="{% url 'listar-item' %}" class="sidebar-link">Inventario</a>
-                        </li>
-                        <li class="sidebar-item ms-5">
-                            <a href="{% url 'listar-post' %}" class="sidebar-link">Postagens</a>
-                        </li>
-                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-usuario' %}" class="sidebar-link">
+                        <i class="fa-solid fa-user pe-2"></i>
+                        Usuários
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-item' %}" class="sidebar-link">
+                        <i class="fa-solid fa-user pe-2"></i>
+                        Itens do Inventário
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-post' %}" class="sidebar-link">
+                        <i class="fa-solid fa-user pe-2"></i>
+                        Postagens
+                    </a>
                 </li>
 
                 {%endif%}

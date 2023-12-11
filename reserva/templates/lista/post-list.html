@@ -14,7 +14,7 @@
 
         <div class="row card-group">
             {% for el in object_list %}
-            <div class="col-3 my-2">
+            <div class="col-md-3 my-2">
                 <div class="card" style="width: 18rem;">
                     <img src="{{el.image.url}}" class="d-block w-100 img-wrapper" alt="image-post">
                     <div class="card-body">
@@ -32,53 +32,7 @@
 
 
         <!-- PAGINAÇÃO -->
-        <nav aria-label="Page navigation example" class="my-3">
-            <ul class="pagination justify-content-center">
-
-            <!-- PRIMEIRA -->
-                {% if page_obj.number != 1 %}
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
-                {%else%}
-
-                {%endif%}
-                </li>
-            
-            <!-- PÁGINA ANTERIOR -->
-                {% if page_obj.has_previous %}  
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
-                {%else%}
-                <li class="page-item disabled">
-                    <a class="page-link text-white-50 bg-dark" href="#">ANTERIOR</a>
-                {%endif%}
-                </li>
-
-            <!-- PÁGINA ATUAL -->
-            <li class="page-item disabled">
-                <div class="page-link current text-white bg-dark">
-                    PÁGINA {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</div></li>
-
-            <!-- PROXIMA PAGINA -->
-                {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.next_page_number }}">PRÓXIMA</a>
-                {%else%}
-                <li class="page-item disabled">
-                    <a class="page-link text-white-50 bg-dark" href="#">PRÓXIMA</a>
-                {%endif%}
-                </li>
-
-                <!-- ULTIMA -->
-                {% if page_obj.number != page_obj.paginator.num_pages %}
-                <li class="page-item">
-                    <a class="page-link text-white bg-dark" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
-                {%else%}
-
-                {%endif%}
-                </li>
-            </ul>
-        </nav>
+        {% include 'lista/pagination.html' %}
         
     </div>
 </div>
