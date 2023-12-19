@@ -1,0 +1,125 @@
+{% load static %}
+
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="" id="sidebar-wrapper">
+        <div class="">
+            <div class="sidebar-logo">
+                <a href="{% url 'perfil' %}">
+                    <img class="img-fluid rounded-circle mx-1" src="{% static 'img/user-img-placeholder.png' %}" style="width: 30px ;">
+                    <span class="ms-2">{{request.user}}</span>
+                </a>
+            </div>
+            <!-- Sidebar Navigation -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-header">
+                    Navegação
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{% url 'inicio' %}" class="sidebar-link">
+                        <i class="fa-solid fa-home pe-2"></i>
+                        Inicio
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{% url 'postagens' %}" class="sidebar-link">
+                        <i class="fa-solid fa-globe pe-2"></i>
+                        Postagens
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{% url 'inventario' %}" class="sidebar-link">
+                        <i class="fa-solid fa-guitar pe-2"></i>
+                        Inventario
+                    </a>
+                </li>
+                {% for group in request.user.groups.all %}
+                {% if group.name == 'Aluno' %}
+
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-solicitacao' %}" class="sidebar-link">
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Minhas Solicitações
+                    </a>
+                </li>
+
+                {% elif group.name == 'Admin' %}
+                
+                <hr>
+
+                <li class="sidebar-header">
+                    Administração 
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-solicitacao' %}" class="sidebar-link">
+                        <i class="fa-solid fa-folder pe-2"></i>
+                        Solicitações
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-usuario' %}" class="sidebar-link">
+                        <i class="fa-solid fa-folder pe-2"></i>
+                        Usuários
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-item' %}" class="sidebar-link">
+                        <i class="fa-solid fa-folder pe-2"></i>
+                        Itens do Inventário
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{% url 'listar-post' %}" class="sidebar-link">
+                        <i class="fa-solid fa-folder pe-2"></i>
+                        Postagens
+                    </a>
+                </li>
+
+                {%endif%}
+                {%endfor%}
+
+                <hr>
+
+                <li class="sidebar-header">
+                    Usuário 
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="{% url 'perfil' %}" class="sidebar-link">
+                        <i class="fa-solid fa-user pe-2"></i>
+                        Meu Perfil
+                    </a>
+                </li>
+
+                <li class="sidebar-item d-flex">
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        
+                        <button type="submit" class="sidebar-link">
+                            <i class="fa-solid fa-right-from-bracket pe-2"></i>
+                            Logout
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg py-3 px-4">
+            <div class="d-flex align-items-center" id="menu-toggle">
+                <i class="fas fa-align-left fs-4 me-3" ></i>
+                <h2 class="fs-2 m-0">INFOMUSICA</h2>
+            </div>
+        </nav>
+

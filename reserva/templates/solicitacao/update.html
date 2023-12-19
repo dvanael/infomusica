@@ -1,0 +1,31 @@
+{% load crispy_forms_tags %}
+
+<form method="post" action="{% url 'js-editar' form.instance.pk %}" class="js-update-form" id="modalSolicitacao" data-bs-theme="dark">
+    {% csrf_token %}
+
+    <div class="modal-header">
+        <h4 class="modal-title">EDITAR SOLICITAÇÃO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        <strong class="text-info ">{{form.instance}}</strong>  
+        <p class='lead'> Preencha todos os campos obrigatórios.</p>
+        {{ form|crispy }}
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary disable-after-submit">Salvar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $("#modalSolicitacao").submit(function() {
+            console.log('deu certo')
+            // Desativa o botão após o envio do formulário
+            $(this).find(".disable-after-submit").prop("disabled", true);
+        });
+    });
+</script>

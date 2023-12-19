@@ -1,0 +1,61 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Inventário</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container-fluid">
+    <div id="mainContainer" class="container">
+        <div class="page-content p-3">
+            <h1>Confira as novas postagens do INFOMUSICA</h1>
+        </div>
+
+        <div>
+            {% for el in object_list %}
+            <hr>
+
+            <div class="row page-content px-lg-3 mx-2 my-4 ">
+                <div class="col-lg-3 col-6 d-flex justify-content-center">
+                    
+                    {% if el.image %}
+                    <img class="inventory-item-img" src="{{ el.image.url }}" alt="Imagem de Capa"   >
+                    
+                    {%else%}
+                    <img class="inventory-item-img" src="{% static 'img/placeholder-img.png' %}" alt="Sem Imagem"> 
+                    {%endif%}
+
+                </div>
+
+                <div class="col-lg-9 col-6 mb-3">
+                    <div class="col-lg-12 pt-3">
+                        <strong>{{ el.title }}</strong>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 post-content-list">
+                            <p>{{el.content|safe}}</p>
+                        </div>
+                    </div>
+                    <div class="my-2 text-md-end text-center"   >
+                        <a href="{% url 'post' el.pk %}" class="btn btn-success"> SAIBA MAIS</a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            {% empty %}
+            <h1>Desculpe! Não há postagems!</h1>
+
+            {% endfor %}
+        </div>
+
+        <!-- PAGINAÇÃO -->
+        {% include 'lista/pagination.html' %}
+        
+    </div>
+</div>
+
+{% endblock %}
+

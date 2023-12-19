@@ -1,0 +1,25 @@
+
+<div class="modal fade" id="deleteModal{{el.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" data-bs-theme="dark">
+    <div class="modal-dialog modal-dialog-centered">
+
+      <div class="modal-content">
+            {% csrf_token %}
+
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteModalLabel">Excluir</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+        <p> Confirme para excluir o registro definitivamente.</p>
+        <p> Deseja excluir o registro: <strong>{{ el }}</strong>?</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-danger "> Excluir</button>
+        </div>
+
+      </div>
+    </div>
+  </div>

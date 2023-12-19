@@ -1,0 +1,57 @@
+{% for solicitacao in object_list %}
+
+<tr>
+    <td>
+        <div class="ms-2">{{solicitacao.profile}}</div></td>
+    <td>{{solicitacao.profile.matricula}}</td>
+
+    <td>
+        <div class="d-flex">
+    {% if solicitacao.status.id == 1 %}
+        <i class="fa-solid fa-circle-exclamation yellow fa-xl mx-auto"></i>  
+    {% elif solicitacao.status.id == 2 %}
+        <i class="fa-solid fa-circle-xmark fa-xl red mx-auto"></i>  
+    {% elif solicitacao.status.id == 3 %}
+        <i class="fa-solid fa-circle-check fa-xl green mx-auto"></i>  
+    {%endif%}
+        </div>
+    </td>
+    
+    <td>{{ solicitacao.justificativa }}</td>
+{% if solicitacao.justify_status == 'Ainda não justificado.' %}
+
+    <td class="text-white-50">{{ solicitacao.justify_status }}</td>
+{%else%}
+    <td>{{ solicitacao.justify_status }}</td>
+{%endif%}
+    <td>{{ solicitacao.data|date:'d/m/Y' }}</td>
+    <td>{{ solicitacao.entry_hour }}</td>
+    <td>{{ solicitacao.exit_hour }}</td>
+    <td>{{solicitacao.post|date:'d/m/Y - H:i'}}</td>
+                
+    <td>
+
+        <div class="dropdown">
+            <button class="btn ms-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-ellipsis-vertical text-white"></i>
+            </button>
+            <ul class="dropdown-menu " >
+              <li><a class="dropdown-item btn js-update" data-url="{% url 'js-editar-status' solicitacao.pk %}">
+                <i class="fa-solid fa-circle-exclamation"></i> Status</a></li>
+
+              <li><a class="dropdown-item btn js-update" data-url="{% url 'js-editar' solicitacao.pk %}">
+                 <i class="fa-solid fa-pen-to-square"></i> Editar</a></li>
+                 
+              <li><a class="dropdown-item btn js-delete" data-url="{% url 'js-excluir' solicitacao.pk %}">
+                 <i class="fa-solid fa-trash"></i> Deletar</a></li>
+            </ul>
+          </div>
+    </div>
+    </td>
+</tr>
+            
+{% empty %}
+<tr>
+    <td colspan="10"> Não há Solicitações.</td>
+</tr>
+{% endfor %}

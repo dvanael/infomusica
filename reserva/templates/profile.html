@@ -1,0 +1,107 @@
+{% extends 'modelo.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>{{Titulo}}</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container fluid">
+<div id="mainContainer" class="container" >
+
+<div class="page-content p-3">
+    <div class="row">
+		<div class="col-md-10"><h1>{{Titulo}}</h1>
+		</div>
+		<div class="col-md-2"><button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            EDITAR PERFIL
+          </button>
+		</div>
+	</div>
+
+    <hr>
+
+    <div class="row d-flex">
+        
+		<div class="col-sm-3">
+            <div class="d-flex"><img alt="profile-pic" src="{% static 'img/user-img-placeholder.png' %}" class="rounded-circle  mx-auto" style="width: 200px;"/></div>
+            
+		</div>
+		
+		<div class="col-sm-9">
+            <h3 class="text-sm-start text-center mt-sm-0 mt-3">
+				{{request.user}}</h3>
+
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item profile-info ">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <strong>Matrícula</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                {{request.user.perfil.matricula}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item profile-info">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <strong>Email</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                {{request.user.email}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item profile-info">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <strong>Minhas Solicitações</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <a href="{% url 'listar-solicitacao' %}">Acessar minhas solicitações</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == 'Admin' %}
+                    <li class="list-group-item profile-info">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <strong>Minhas Postagens</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <a href="{% url 'listar-post' %}">Acessar minhas postagens</a>
+                            </div>
+                        </div>
+                    </li>
+                    {%endif%} {%endfor%}
+                  </ul>
+		</div>
+	</div>
+
+    <hr>
+
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body" id="cardEditProfile">
+            <h3>Editar Informações de Usuário</h3>
+            <div>
+                <form action="" method="post">
+                    {% csrf_token %}
+    
+                    {{ form|crispy}}
+    
+                    <div class="row">
+                        <a href="{% url 'mudar-senha' %}" class="btn btn-secondary mx-auto col-md-5">Mudar Senha</a>
+                        <button type="submit" class="btn btn-success mx-auto col-md-5"> Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+
+</div>
+</div>
+</div>
+{% endblock %}
