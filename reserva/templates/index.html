@@ -19,10 +19,13 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-solid fa-bars text-white"></i></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'inicio' %}">Acessar</a></li>
+
                     <li class="nav-item"><a class="nav-link active" href="{% url 'registrar' %}">Cadastre-se</a></li>
                     
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'inicio' %}">Acessar</a></li>
+                    
                     {%else%}
                     <li class="nav-item"><a class="nav-link active" href="{% url 'login' %}">Entrar</a></li>
                     {%endif%}
@@ -36,9 +39,11 @@
     <header id="titleIndex" class="masthead text-center" style="background-image: url({% static 'img/bg-index.png'%})">
         <div class="masthead-content">
             <div class="container px-5">
-                <h1 class="masthead-heading mb-0">Muito Rock</h1>
-                <h3 class="masthead-subheading mb-0">E o projeto? Nada ainda?</h3>
-                <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">SAIBA MAIS</a>
+                <h1 class="masthead-heading mb-0">INFOMUSICA</h1>
+                <h3 class="masthead-subheading mb-0">A Música no ambiente escolar!</h3>
+                <a class="btn btn-success btn-xxl rounded-pill mt-5 fs-4 px-4" href="{% url 'inicio' %}">ENTRE AGORA!</a>
+                <!-- 
+                <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">SAIBA MAIS</a> -->
             </div>
         </div>
     </header>
@@ -50,12 +55,15 @@
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/cirilo.gif'%}" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/placeholder-img.png'%}" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">For those about to rock...</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Pela cultura musical!</h2>
+                        <p>Pela cultura musicaleto que visa, juntamente da professora Priscila Gomes, proporcionar maior desenvolvimento da cultura musical no campus IFRN SPP.
+                            O compromisso dessa proposta reside na oferta de experiências enriquecedoras que transcendem a mera aprendizagem técnica,
+                            visando estimular o interesse e a apreciação pela diversidade musical.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -66,12 +74,13 @@
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/pat-moonless.gif'%}" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/placeholder-img.png'%}" alt="..." /></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4">We salute you!</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">A Sala de Música!</h2>
+                        <p>A sala é um ambiente impecável com vários instrumentos. Foi projetada pelo professor Ricardo e é muito silenciosa,
+                             pois foi construída utilizando-se de isolamento sonoro, possuindo, além disso, ar-condicionado.</p>
                     </div>
                 </div>
             </div>
@@ -82,18 +91,17 @@
         <div class="container px-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/joel.gif'%}" alt="..." /></div>
+                    <div class="p-5"><img class="img-fluid rounded-circle index-image" src="{% static 'img/placeholder-img.png'%}" alt="..." /></div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Let there be rock!</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Não Perca Tempo!</h2>
+                        <p>Inscreva-se agora para ter acesso a várias postagens, conteúdos e a possibilidade de se inscrever em projetos e oficinas. Aproveite a oportunidade para se envolver com a música!</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-        
     </div>
 </div>
 {% endblock %}
