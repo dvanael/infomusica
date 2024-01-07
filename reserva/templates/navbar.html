@@ -5,10 +5,17 @@
     <div class="" id="sidebar-wrapper">
         <div class="">
             <div class="sidebar-logo">
+
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'perfil' %}">
                     <img class="img-fluid rounded-circle mx-1" src="{% static 'img/user-img-placeholder.png' %}" style="width: 30px ;">
                     <span class="ms-2">{{request.user}}</span>
                 </a>
+                {%else%}
+                <a href="{% url 'registrar' %}">
+                    <span class="ms-2">Crie uma conta!</span>
+                </a>
+                {%endif%}
             </div>
             <!-- Sidebar Navigation -->
             <ul class="sidebar-nav">
@@ -90,6 +97,7 @@
                 <li class="sidebar-header">
                     Usuário 
                 </li>
+                {% if request.user.is_authenticated %}
 
                 <li class="sidebar-item">
                     <a href="{% url 'perfil' %}" class="sidebar-link">
@@ -109,6 +117,16 @@
                     </form>
                 </li>
 
+                {%else%}
+
+                <li class="sidebar-item">
+                    <a href="{% url 'login' %}" class="sidebar-link">
+                        <i class="fa-solid fa-right-from-bracket pe-2"></i>
+                        Entrar
+                    </a>
+                </li>
+                {%endif%}
+
             </ul>
         </div>
     </div>
@@ -122,4 +140,3 @@
                 <h2 class="fs-2 m-0">INFOMUSICA</h2>
             </div>
         </nav>
-
