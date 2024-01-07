@@ -14,6 +14,7 @@
 */
 
 :root{
+    
     --deep-color: #0a0d10;
     --main-color:#2c2d34;
     --low-color:#191C20;
@@ -23,22 +24,6 @@
     --toggle-color: #8698ff ;
     --contrast-color: #f5fcfd; 
 }
-
-.cores-doidas-1-hex { color: #E8FFF3; }
-.cores-doidas-2-hex { color: #283340; }
-
-.azul-madrugada-1-hex { color: #14151C; }
-.azul-madrugada-2-hex { color: #282F4F; }
-.azul-madrugada-3-hex { color: #45518A; }
-.azul-madrugada-4-hex { color: #9EABE2; }
-.azul-madrugada-5-hex { color: #D8DCF0; }
-
-.preliminary-bi-palette-neutrals-1-hex { color: #000000; }
-.preliminary-bi-palette-neutrals-2-hex { color: #A69F95; }
-.preliminary-bi-palette-neutrals-3-hex { color: #7A7A7A; }
-.preliminary-bi-palette-neutrals-4-hex { color: #FFFFFF; }
-.preliminary-bi-palette-neutrals-5-hex { color: #606B73; }
-
 
 * {
     font-family: 'Poppins';
@@ -111,8 +96,6 @@ footer {
     background-color: var(--deep-color);
     padding-top: 1% ;
     padding-bottom: 4%;
-
-    
 }
 
 footer p.lead{
@@ -127,7 +110,6 @@ footer p.lead{
     padding-left: 1%;
 }
 
-
 #modalSolicitacao {
     background-color: var(--main-color);
 }
@@ -135,67 +117,6 @@ footer p.lead{
 .page-content {
     background-color: var(--low-color);
     border-radius: 13px;
-}
-
-
-/*  SIDE NAVBAR */
-#sideNavbar{
-    background: var(--low-color);
-    color: var(--primary-color);
-    min-width: 250px;
-    max-width: 250px;
-    transition: all 0.3s;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    z-index: 2;
-    font-size: 13px;
-}
-
-#navbarLogo {
-    margin-left: 1%;
-}
-#navbarLogo a:hover {
-    text-decoration: none;
-    color: var(--contrast-color);
-}
-
-
-#sidebarItem a{
-    color: var(--primary-color);
-    border-radius: 10px;
-    padding-left: 3%;
-}
-
-#sidebarItem a:hover {
-    background-color: var(--secondary-color);
-    color: var(--deep-color);
-    font-weight: bold;
-}
-
-#topNavbar {
-    background-color: var(--low-color);
-}
-
-#topNavbar a, #topNavbar i{
-    color: var(--contrast-color);
-}
-
-#profileDropdown{
-    background-color: var(--main-color);
-    border-color: var(--secondary-color);
-}
-
-#profileDropdown :hover{
-    background-color: var(--secondary-color);
-    color:  var(--deep-color);
-}
-
-.content{
-    min-height: 100vh;
-    width: 100%;
-}
-.sidenavbar hr.h-color{
-    background: var(--secondary-color);
 }
 
 /*  SOLCITACAO */
@@ -223,7 +144,6 @@ footer p.lead{
     border-color: var(--main-color);
 }
 
-
 /*  FORM CONTENT */
 .form-text {
     color: var(--primary-color);
@@ -239,13 +159,6 @@ footer p.lead{
     color: var(--contrast-color);
     border-width: 1%;
     border-color: var(--mid-color);
-}
-
-
-.custom-tooltip {
-    --bs-tooltip-bg: var(--deep-color);
-    --bs-tooltip-color: var(--secondary-color);
-    font-size: large;
 }
 
 /*  INDEX */
@@ -281,8 +194,6 @@ footer p.lead{
     height: 150%;
 }
 
-
-
 /*  LOGIN */
 #loginContainer{
     .wrap{
@@ -301,9 +212,9 @@ footer p.lead{
 }
 
 #loginContainer img{
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center center;
+    max-width: 50%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 #loginContainer .form-control{
@@ -496,18 +407,9 @@ footer p.lead{
 
 }
 
-/* 
-#calendar .fc-col-header{
-    background-color: var(--secondary-color);
-    && a{
-        color: var(--deep-color);
-    }
-} */
-
 .popover {
     color: var(--deep-color);
 }
-
 
 /* CARROSEL */
 
@@ -661,6 +563,10 @@ footer p.lead{
     color: var(--contrast-color);
     font-size: 1.25rem;
     font-weight: 600;
+    & :hover{
+        color: var(--toggle-color);
+        transition: all .2s ease-out;
+    }
 }
 
 .sidebar-nav {
@@ -672,15 +578,6 @@ footer p.lead{
     font-size: .75rem;
     padding: .5rem 1.5rem .375rem;
 }
-/* 
-button.sidebar-link {
-    padding: .625rem 1.625rem;
-    color: var(--contrast-color);
-    position: relative;
-    display: block;
-    font-size: 0.9rem;
-} */
-
 
 .sidebar-link {
     padding: .625rem 1.625rem;
@@ -719,7 +616,6 @@ button.sidebar-link {
 .navbar{
     background-color: var(--deep-color);
 }
-
 
 /* INVENTARIO */
 
