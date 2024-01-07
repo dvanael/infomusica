@@ -7,3 +7,4 @@ crispy-bootstrap5
 fontawesomefree==6.4.2
 Pillow
 django-ckeditor
+decouple
