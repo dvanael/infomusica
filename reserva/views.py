@@ -28,9 +28,7 @@ from django.conf import settings
 class IndexView(TemplateView):
     template_name = 'index.html'
 
-class DashboardView(GroupRequiredMixin, ListView):
-    group_required = [u'Aluno',u'Admin']
-    login_url = reverse_lazy('login')
+class DashboardView(ListView):
     model = Solicitacao
     template_name = 'dashboard.html'
 
