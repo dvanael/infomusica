@@ -29,23 +29,15 @@ pip install -r requiriments.txt
 ```
 ---
 **Definas as variavéis de sistema.**
-- Crie um arquivo  `.env`
+- Execute no terminal `python contrib/env_gen.py`
 - Adicione as dependências no arquivo
 
 **.env**
 ```
-DEBUG = True
-SECRET_KEY = 'sua_secret_key'
-
-DEFAULT_FROM_EMAIL = 'seu_titulo'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-
-EMAIL_HOST_USER = 'seu_email'
-EMAIL_HOST_PASSWORD = 'sua_senha'
+DEFAULT_FROM_EMAIL = '<seu_titulo>'
+...
+EMAIL_HOST_USER = '<seu_email>'
+EMAIL_HOST_PASSWORD = '<sua_senha>'
 ```
 ---
 **Configure na sua máquina.**
