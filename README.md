@@ -34,8 +34,18 @@ pip install -r requiriments.txt
 
 **.env**
 ```
-EMAIL_HOST_USER = "<seu_email>"
-EMAIL_HOST_PASSWORD = "<sua_senha>"
+DEBUG = True
+SECRET_KEY = 'sua_secret_key'
+
+DEFAULT_FROM_EMAIL = 'seu_titulo'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'seu_email'
+EMAIL_HOST_PASSWORD = 'sua_senha'
 ```
 ---
 **Configure na sua máquina.**
@@ -43,10 +53,6 @@ EMAIL_HOST_PASSWORD = "<sua_senha>"
 ```bash
 python manage.py makemigrations
 python manage.py migrate
-```
-- Colete os arquivos estáticos (se necessário).
-```bash
-python mana.py collectstatic
 ```
 
 - Crie um super usuário chamado `admin`
@@ -61,16 +67,16 @@ python manage.py createsuperuser
 from django.contrib.auth.models import Group, User
 from reserva.models import Status, Perfil
 
-admin_group, created = Group.objects.get_or_create(name='Admin')
-alunos_group, created = Group.objects.get_or_create(name='Aluno')
+adminG, created = Group.objects.get_or_create(name='Admin')
+alunoG, created = Group.objects.get_or_create(name='Aluno')
 
 admin = User.objects.get(username='admin')
-perfil_admin, created = Perfil.objects.get_or_create(user=admin, matricula="00001")
-admin.groups.add(admin_group)
+adminP, created = Perfil.objects.get_or_create(user=admin, matricula="00001")
+admin.groups.add(adminG)
 
-pendente = Status.objects.create(name='Pendente')
-rejeitada = Status.objects.create(name='Rejeitada')
-aprovada = Status.objects.create(name='Aprovada')
+s1 = Status.objects.create(name='Pendente')
+s2 = Status.objects.create(name='Rejeitada')
+s3 = Status.objects.create(name='Aprovada')
 
 exit()
 ```
