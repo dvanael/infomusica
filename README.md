@@ -30,7 +30,7 @@ pip install -r requiriments.txt
 ---
 **Definas as variavéis de sistema.**
 - Execute no terminal `python contrib/env_gen.py`
-- Adicione as dependências no arquivo
+- Adicione as dependências no arquivo `.env`
 
 **.env**
 ```
