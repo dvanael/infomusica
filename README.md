@@ -1,7 +1,7 @@
 <img src="static/img/infomusica-logotipo.png" alt="infomusica-logotipo" style="border-radius: 30px;">
 
 ## SOBRE
-O INFOMUSICA é um sistema web para a difusão cultural da música no Campus IFRN SPP por meio deste. Visto a problemática de baixo interresse e pouco conhecimento dos eventos relacionados ao Laboratório de Práticas Musicais.
+O INFOMUSICA é um sistema web para a difusão cultural da música no Campus IFRN SPP. Visto a problemática de baixo interresse e pouco conhecimento dos eventos relacionados ao Laboratório de Práticas Musicais.
 
 O projeto conta com :
 - Sistema de agendamento e gerenciamento de reversas para o Laboratório de Práticas Musicais do campus ;
