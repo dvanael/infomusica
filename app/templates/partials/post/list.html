@@ -1,0 +1,16 @@
+{% for object in object_list %}
+  <tr>
+    <td>{{object.title}}</td>
+    <td>{{object.author}}</td>
+    <td>{{object.image.url}}</td>
+    <td>{{object.timestamp|date:"SHORT_DATETIME_FORMAT"}}</td>
+    <td>
+      <a href="{% url 'update-post' object.pk %}" class="btn">Editar</a>
+      <button data-url="{% url 'js-delete-post' object.pk %}" class="js-delete">Apagar</button>
+    </td>
+  </tr>
+  {%empty%}
+  <tr>
+    <td colspan="5">Sem Postagens.</td>
+  </tr>
+{% endfor %}

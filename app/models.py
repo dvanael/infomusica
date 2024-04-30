@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from ckeditor.fields import RichTextField
     
 class Profile(AbstractUser):
   username = models.EmailField(_('Email'), unique=True)
@@ -23,7 +24,6 @@ class Solicitation(models.Model):
      ('A', 'Aprovada'),
      ('R', 'Rejeitda'),
   )
-
     
   profile = models.ForeignKey("app.Profile", verbose_name=_("Perfil"), on_delete=models.PROTECT)
   justify = models.TextField(_('Justificativa'), default=None, max_length=250)
@@ -37,5 +37,19 @@ class Solicitation(models.Model):
   def __str__(self):
     return "Solicitação de {} ({}) - {}".format(self.profile, self.get_status_display(), self.date)
   
+  class Meta:
+    ordering = ['-timestamp']
+
+
+class Post(models.Model):
+  title = models.CharField(_('Título'), default=None, max_length=150)
+  content = RichTextField(_('Conteúdo'), default=None,)
+  image = models.ImageField(_('Imagem de Capa'), upload_to='thumbnails/' ,null=False, blank=False)
+  author = models.ForeignKey(Profile, verbose_name='Autor', on_delete=models.PROTECT)
+  timestamp = models.DateTimeField(_('Timestamp'), auto_now=True, auto_now_add=False)
+
+  def __str__(self):
+    return f'{self.title} por {self.author} - {self.timestamp.date()}'
+    
   class Meta:
     ordering = ['-timestamp']

@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}POSTAGENS{% endblock title %} 
+
+{% block content %}
+<div class="container">
+  <h1>POSTAGENS</h1>
+  <p>
+    <a class="btn btn-success" href="{% url 'create-post' %}">Nova Postagem</a>
+  </p>
+  <table id="partial-table"  class="table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Imagem de Capa</th>
+        <th>Postado em</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include "partials/post/list.html" %}
+    </tbody>
+  </table>
+
+  {% include "partials/modal.html" %}
+
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery.ajax.js' %}"></script>
+{% endblock script %}

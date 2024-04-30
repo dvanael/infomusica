@@ -1,0 +1,14 @@
+{% extends "base.html" %} 
+{% block title %}POSTAGENS{% endblock title %} 
+{% block content %}
+<div class="container">
+  <h1>CRIAR NOVA POSTAGEM</h1>
+  <form action="{% url 'create-post' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{form}}
+    <button type="submit">CRIAR</button>
+  </form>
+  <a href="{% url 'post-list' %}">Voltar</a>
+</div>
+{% endblock content %}

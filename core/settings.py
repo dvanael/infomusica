@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from decouple import config
 
@@ -107,7 +108,7 @@ else:
 
 # MEDIA
 MEDIA_URL = '/media/'
-MEDIA_ROOT = [BASE_DIR / 'media']
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # AUTO FIELD
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
