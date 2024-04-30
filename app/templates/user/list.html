@@ -1,0 +1,31 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}USUÁRIOS{% endblock title %} 
+
+{% block content %}
+<div class="container">
+  <h1>USUÁRIOS</h1>
+
+  <table id="partial-table"  class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Matrícula</th>
+        <th>Administrador</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include "partials/user/list.html" %}
+    </tbody>
+  </table>
+
+  {% include "partials/modal.html" %}
+
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery.ajax.js' %}"></script>
+{% endblock script %}

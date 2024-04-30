@@ -58,3 +58,13 @@ class UserLoginForm(AuthenticationForm):
             'autofocus': True,
         }
         password.widget.attrs={'placeholder': 'Digite sua senha'}
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("username",)
+
+class PermissionForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("is_staff",)

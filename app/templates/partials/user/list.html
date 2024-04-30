@@ -1,0 +1,23 @@
+{% for object in object_list %}
+  <tr>
+    <td>{{object.get_full_name}}</td>
+    <td>{{object.username}}</td>
+    <td>{{object.matricula}}</td>
+    <td>
+    {% if object.is_staff %}
+      SIM
+    {% else %}
+      NÃO
+    {% endif %}
+    </td>
+    <td>
+      <button data-url="{% url 'js-update-user' object.pk %}" class="js-update">Editar</button>
+      <button data-url="{% url 'js-delete-user' object.pk %}" class="js-delete">Apagar</button>
+      <a href="{% url 'update-user-permission'  object.pk %}" class="btn">Permissão</a>
+    </td>
+  </tr>
+  {%empty%}
+  <tr>
+    <td colspan="10">Sem Solicitações.</td>
+  </tr>
+{% endfor %}

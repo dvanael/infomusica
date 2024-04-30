@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import UpdateView
 
-from app.forms.user import UserLoginForm, UserRegisterForm
+from app.utils.ajax import AjaxListView, AjaxCreateView, AjaxUpdateView, AjaxDeleteView
+from app.forms.user import UserLoginForm, UserRegisterForm, UserForm, PermissionForm
+from app.models import Profile
 
 def register(request):
     template_name = 'registration/register.html'
@@ -56,3 +60,36 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+class UserList(AjaxListView):
+    model = Profile
+    template_name = 'user/list.html'
+    partial_list = 'partials/user/list.html'
+
+
+class UserUpdate(AjaxUpdateView):
+  form_class = UserForm
+  template_name = 'partials/user/update.html'
+  success_url = reverse_lazy('user-list')
+
+class UserDelete(AjaxDeleteView):
+  model = Profile
+  template_name = 'partials/user/delete.html'
+  success_url = reverse_lazy('user-list')
+
+class UserUpdatePermission(UpdateView):
+    model = Profile
+    form_class = PermissionForm
+    template_name = 'user/change-permission.html'
+    success_url = reverse_lazy('user-list')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['is_staff'] = True   
+        if self.object.is_staff:
+            initial['is_staff'] = False  
+        return initial
+
+    def form_valid(self, form):
+        # messages.success(self.request, f'A permissão de {form.instance} foi alterada com sucesso!')
+        return super().form_valid(form)

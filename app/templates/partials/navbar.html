@@ -1,6 +1,8 @@
-<div class="container d-flex align-items-center">
+<div class="container my-4">
+  <a href="{% url 'index' %}">Inicio</a>
   <a href="{% url 'solicitation-list' %}">Solicitações</a>
+  <a href="{% url 'user-list' %}">Usuários</a>
 
   <span>{{request.user}}</span>
-  <a href="{% url 'logout' %}" class="btn">Logout</a>
+  <a href="{% url 'logout' %}">Logout</a>
 </div>
