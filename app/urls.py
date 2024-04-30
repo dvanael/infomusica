@@ -3,7 +3,7 @@ from django.urls import path, include
 from .views.index import index
 from .views.user import register, login_view, logout_view
 
-from .routers import solicitation, user, post
+from .routers import solicitation, user, post, item
 
 # Crie suas urls aqui
 urlpatterns = [
@@ -16,4 +16,5 @@ urlpatterns = [
   path('solicitacoes/', include(solicitation)),
   path('usuarios/', include(user)),
   path('postagens/', include(post)),
+  path('inventario/', include(item)),
 ]

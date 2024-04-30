@@ -44,7 +44,7 @@ class Solicitation(models.Model):
 class Post(models.Model):
   title = models.CharField(_('Título'), default=None, max_length=150)
   content = RichTextField(_('Conteúdo'), default=None,)
-  image = models.ImageField(_('Imagem de Capa'), upload_to='thumbnails/' ,null=False, blank=False)
+  image = models.ImageField(_('Imagem de Capa'), upload_to='thumbnails/posts/' ,null=False, blank=False)
   author = models.ForeignKey(Profile, verbose_name='Autor', on_delete=models.PROTECT)
   timestamp = models.DateTimeField(_('Timestamp'), auto_now=True, auto_now_add=False)
 
@@ -53,3 +53,15 @@ class Post(models.Model):
     
   class Meta:
     ordering = ['-timestamp']
+
+class Item(models.Model):
+  name = models.CharField(default=None, max_length=100, verbose_name='Nome')
+  description = models.TextField(default=None, max_length=550, verbose_name='Descrição')
+  image = models.ImageField(null=True, blank=True, upload_to='thumbnails/itens/', verbose_name='Imagem')
+  audio = models.FileField(null=True, blank=True, upload_to='documents/audio/', verbose_name='Amostra de Áudio')
+
+  def __str__(self):
+      return self.name
+  
+  class Meta:
+    ordering = ['-id']

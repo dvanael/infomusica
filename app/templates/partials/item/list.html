@@ -1,0 +1,22 @@
+{% for object in object_list %}
+  <tr>
+    <td>{{object.name}}</td>
+    <td>{{object.description}}</td>
+    <td>{{object.image.url}}</td>
+    <td>
+      {% if object.audio %}
+      SIM
+      {% else %}
+      NÃO
+      {% endif %}
+    </td>
+    <td>
+      <a href="{% url 'update-item' object.pk %}" class="btn">Editar</a>
+      <button data-url="{% url 'js-delete-item' object.pk %}" class="js-delete">Apagar</button>
+    </td>
+  </tr>
+  {%empty%}
+  <tr>
+    <td colspan="5">Sem Itens no Iventário.</td>
+  </tr>
+{% endfor %}

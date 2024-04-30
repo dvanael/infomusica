@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}INVENTÁRIO{% endblock title %} 
+
+{% block content %}
+<div class="container">
+  <h1>INVENTÁRIO</h1>
+  <p>
+    <a class="btn btn-success" href="{% url 'create-item' %}">Adicionar Novo Item</a>
+  </p>
+  <table id="partial-table"  class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Imagem de Capa</th>
+        <th>Amostra de Audio</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include "partials/item/list.html" %}
+    </tbody>
+  </table>
+
+  {% include "partials/modal.html" %}
+
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery.ajax.js' %}"></script>
+{% endblock script %}

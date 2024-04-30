@@ -1,0 +1,14 @@
+{% extends "base.html" %} 
+{% block title %}INVENTÀRIO{% endblock title %} 
+{% block content %}
+<div class="container">
+  <h1>ADICIONAR NOVO ITEM</h1>
+  <form action="{% url 'create-item' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{form}}
+    <button type="submit">CRIAR</button>
+  </form>
+  <a href="{% url 'item-list' %}">Voltar</a>
+</div>
+{% endblock content %}
