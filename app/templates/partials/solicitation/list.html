@@ -1,0 +1,31 @@
+{% for object in object_list %}
+  <tr>
+    <td>{{object.profile}}</td>
+    <td>{{object.profile.matricula}}</td>
+    <td>{{object.get_status_display}}</td>
+    <td>{{object.justify}}</td>
+    <td>
+      {% if object.justify_status %}
+      {{object.justify_status}}
+      {% else %}
+      Ainda não justificado.
+      {% endif %}
+    </td>
+    <td>{{object.date|date:"SHORT_DATE_FORMAT"}}</td>
+    <td>{{object.entry_hour}}</td>
+    <td>{{object.exit_hour}}</td>
+    <td>{{object.timestamp|date:"SHORT_DATETIME_FORMAT"}}</td>
+    <td>
+      {% if object.status != 'P' %}
+      {% else %}
+      <button data-url="{% url 'js-update-solicitation' object.pk %}" class="js-update">Editar</button>
+      <button data-url="{% url 'js-delete-solicitation' object.pk %}" class="js-delete">Apagar</button>
+      {% endif %}
+      <button data-url="{% url 'js-status-update-solicitation' object.pk %}" class="js-update">Status</button>
+    </td>
+  </tr>
+  {%empty%}
+  <tr>
+    <td colspan="10">Sem Solicitações.</td>
+  </tr>
+{% endfor %}

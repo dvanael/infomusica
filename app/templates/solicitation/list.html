@@ -1,0 +1,38 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}SOLICITAÇÕES{% endblock title %} 
+
+{% block content %}
+<div class="container">
+  <h1>SOLICITAÇÕES</h1>
+  <p>
+    <button class="js-create btn btn-success" type="button" data-url="{% url 'js-create-solicitation' %}">Nova Solicitação</button>
+  </p>
+  <table id="partial-table"  class="table">
+    <thead>
+      <tr>
+        <th>Usuário</th>
+        <th>Matricula</th>
+        <th>Status</th>
+        <th>Justificativa</th>
+        <th>Justif. Status</th>
+        <th>Data</th>
+        <th>Entrada</th>
+        <th>Saída</th>
+        <th>Postado em</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include "partials/solicitation/list.html" %}
+    </tbody>
+  </table>
+
+  {% include "partials/modal.html" %}
+
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery.ajax.js' %}"></script>
+{% endblock script %}

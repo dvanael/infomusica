@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+{% block title %}LOGIN{% endblock title %} 
+{% block navbar %}{% endblock navbar %}
+{% block footer %}{% endblock footer %}
+{% block content %}
+<div class="container">
+  <h1>LOGIN</h1>
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Entrar</button>
+  </form>
+  <a href="{% url 'register' %}">Crie uma conta</a>
+</div>
+{% endblock content %}

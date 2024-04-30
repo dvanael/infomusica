@@ -1,0 +1,6 @@
+<div class="container d-flex align-items-center">
+  <a href="{% url 'solicitation-list' %}">Solicitações</a>
+
+  <span>{{request.user}}</span>
+  <a href="{% url 'logout' %}" class="btn">Logout</a>
+</div>
