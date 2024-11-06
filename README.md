@@ -1,4 +1,6 @@
-# ![INFOMUSICA](static/img/infomusica-logotipo.png)
+![INFOMUSICA](static/img/infomusica-logotipo.png)
+
+# INFOMUSICA
 
 ## SOBRE
 
@@ -43,9 +45,10 @@ python -m venv .venv
 - Ative o ambiente virtual 
   
 _windows_
-```bash
-source .venv/Scripts/activate
+```powershell
+.venv/Scripts/activate
 ```
+
 _linux, macOs_
 ```bash
 source .venv/bin/activate
@@ -64,15 +67,7 @@ pip install -r requiriments.txt
 - Crie as variáveis de ambiente
 
 ```bash
-python contrib/env_gen.py
-```
-
-**.env**
-```
-DEFAULT_FROM_EMAIL=<seu_titulo>
-...
-EMAIL_HOST_USER=<seu_email>
-EMAIL_HOST_PASSWORD=<sua_senha>
+python scripts/env_gen.py
 ```
 
 > Se necessário, mude as configurações do  arquivo ``.env``
@@ -80,7 +75,6 @@ EMAIL_HOST_PASSWORD=<sua_senha>
 - Faça as migrações necessárias
 
 ```bash
-python manage.py makemigrations
 python manage.py migrate
 ```
 
@@ -88,38 +82,13 @@ python manage.py migrate
 
 ### Rodando o servidor
 
-- Crie um super usuário chamado ``admin``
+- Execute o arquivo scripts/setup.py para configuração inicial
 
 ```bash
-python manage.py createsuperuser
+python scripts/env_gen.py
 ```
 
-- Execute o terminal interativo do Django
-
-```bash
-python manage.py shell
-```
-
-- Copie o código de `config.py`, cole no terminal, clique `Enter`
-
-**config.py**
-```py
-from django.contrib.auth.models import Group, User
-from reserva.models import Status, Perfil
-
-adminG, created = Group.objects.get_or_create(name='Admin')
-alunoG, created = Group.objects.get_or_create(name='Aluno')
-
-admin = User.objects.get(username='admin')
-adminP, created = Perfil.objects.get_or_create(user=admin, matricula="00001")
-admin.groups.add(adminG)
-
-s1 = Status.objects.create(name='Pendente')
-s2 = Status.objects.create(name='Rejeitada')
-s3 = Status.objects.create(name='Aprovada')
-
-exit()
-```
+> ⚠️ ATENÇÃO: Você receberá um usuário e senha para entrar no sistema.]
 
 - Rode o sevirdor
 
