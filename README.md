@@ -85,7 +85,7 @@ python manage.py migrate
 - Execute o arquivo scripts/setup.py para configuração inicial
 
 ```bash
-python scripts/env_gen.py
+python scripts/setup.py
 ```
 
 > ⚠️ ATENÇÃO: Você receberá um usuário e senha para entrar no sistema.]
