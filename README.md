@@ -16,14 +16,14 @@ O projeto conta com :
 Este projeto foi utilizado para a conclusão da matéria Projeto Integrador, que visa a aplicação práticas de todo o aprendizado adquirido nas matérias do curso integrado.
 
 ## TECNOLOGIAS UTILIZADAS
-  
+
 ![Django](https://img.shields.io/badge/-Django-0d1117?style=for-the-badge&logo=Django&logoColor=green)
 ![Python](https://img.shields.io/badge/-Python-0d1117?style=for-the-badge&logo=Python)
-![HTML](https://img.shields.io/badge/-HTML5-0d1117?style=for-the-badge&logo=html5&logoColor) 
-![CSS3](https://img.shields.io/badge/-CSS3-0d1117?style=for-the-badge&logo=css3&logoColor=blue) 
-![JavaScript](https://img.shields.io/badge/-JavaScript-0d1117?style=for-the-badge&logo=javascript&logoColor) 
-![Jquery](https://img.shields.io/badge/-Jquery-0d1117?style=for-the-badge&logo=jquery&logoColor) 
-![AJAX](https://img.shields.io/badge/-AJAX-0d1117?style=for-the-badge&logo=ajax&logoColor) 
+![HTML](https://img.shields.io/badge/-HTML5-0d1117?style=for-the-badge&logo=html5&logoColor)
+![CSS3](https://img.shields.io/badge/-CSS3-0d1117?style=for-the-badge&logo=css3&logoColor=blue)
+![JavaScript](https://img.shields.io/badge/-JavaScript-0d1117?style=for-the-badge&logo=javascript&logoColor)
+![Jquery](https://img.shields.io/badge/-Jquery-0d1117?style=for-the-badge&logo=jquery&logoColor)
+![AJAX](https://img.shields.io/badge/-AJAX-0d1117?style=for-the-badge&logo=ajax&logoColor)
 ![Bootstrap](https://img.shields.io/badge/-Bootstrap-0d1117?style=for-the-badge&logo=bootstrap&logoColor)
 
 ## INSTALAÇÃO
@@ -42,8 +42,8 @@ git clone https://github.com/dvanael/infomusica.git
 python -m venv .venv
 ```
 
-- Ative o ambiente virtual 
-  
+- Ative o ambiente virtual
+
 _windows_
 ```powershell
 .venv/Scripts/activate
@@ -61,7 +61,7 @@ source .venv/bin/activate
 - Instale as dependências
 
 ```bash
-pip install -r requiriments.txt
+pip install -r requirements.txt
 ```
 
 - Crie as variáveis de ambiente
