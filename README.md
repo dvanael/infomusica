@@ -15,6 +15,8 @@ O projeto conta com :
 
 Este projeto foi utilizado para a conclusão da matéria Projeto Integrador, que visa a aplicação práticas de todo o aprendizado adquirido nas matérias do curso integrado.
 
+---
+
 ## TECNOLOGIAS UTILIZADAS
 
 ![Django](https://img.shields.io/badge/-Django-0d1117?style=for-the-badge&logo=Django&logoColor=green)
@@ -25,6 +27,41 @@ Este projeto foi utilizado para a conclusão da matéria Projeto Integrador, que
 ![Jquery](https://img.shields.io/badge/-Jquery-0d1117?style=for-the-badge&logo=jquery&logoColor)
 ![AJAX](https://img.shields.io/badge/-AJAX-0d1117?style=for-the-badge&logo=ajax&logoColor)
 ![Bootstrap](https://img.shields.io/badge/-Bootstrap-0d1117?style=for-the-badge&logo=bootstrap&logoColor)
+
+---
+
+## APRESENTAÇÃO
+
+Gravações e imagens do sistema funcionando.
+
+### Capturas de Tela
+
+![apresentacao-infomusica-gif](https://github.com/user-attachments/assets/b630729c-7d2e-404c-904d-b5da5f76515a)
+
+---
+
+**Página de Login**
+
+![login-infomusica](https://github.com/user-attachments/assets/8c44dc75-ae2a-4b54-9959-1249ab82b7ab)
+
+---
+
+**Página do Inventário**
+
+![inventario-infomusica](https://github.com/user-attachments/assets/a440c958-ae16-41fd-9664-4b0c18385109)
+
+---
+
+**Página de Postagens**
+
+![postagens-infomusica](https://github.com/user-attachments/assets/bf084b9f-3ddb-45aa-985b-1cf123a3d33d)
+
+---
+
+**Página da Lista de Solicitações - Adminstrador**
+![solicitacoes-adm-infomusica](https://github.com/user-attachments/assets/e738a707-b90e-4aa1-bf38-07de0ab8a5cf)
+
+---
 
 ## INSTALAÇÃO
 
